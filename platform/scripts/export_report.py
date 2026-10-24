@@ -6,7 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RES = ROOT / "benchmarks" / "pdf" / "results"
-OUT = ROOT.parent / "web" / "src" / "data" / "pdf-benchmark.json"
+OUTS = [ROOT.parent / "web" / "src" / "data" / "pdf-benchmark.json", ROOT.parent / "app" / "src" / "data" / "pdf-benchmark.json"]
 SCENARIOS = {"plain": "单栏正文", "multicol": "双栏", "table": "表格", "chinese": "中文", "scanned": "扫描件"}
 
 
@@ -73,8 +73,10 @@ def main():
     }
     fhe = json.loads((ROOT / "benchmarks" / "fhe" / "results.json").read_text())
     data["fhe"] = {"dataset": fhe["dataset"], "runs": [r for r in fhe["ckks"] if "error" not in r]}
-    OUT.write_text(json.dumps(data, ensure_ascii=False, indent=1))
-    print(f"wrote {OUT} ({len(tools)} tools)")
+    for out in OUTS:
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps(data, ensure_ascii=False, indent=1))
+        print(f"wrote {out} ({len(tools)} tools)")
 
 
 if __name__ == "__main__":

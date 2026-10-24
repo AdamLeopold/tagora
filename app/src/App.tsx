@@ -1,4 +1,4 @@
-import { ArrowLeft, Blocks, Bot, LockKeyhole, Menu, PackagePlus, RotateCcw, Store, Target, Wallet, X } from 'lucide-react';
+import { ArrowLeft, Blocks, Bot, LockKeyhole, Menu, PackagePlus, RotateCcw, Server, Store, Target, Wallet, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { NavLink, Route, Routes, useLocation } from 'react-router-dom';
 import { StoreProvider, useStore } from './lib/store';
@@ -6,6 +6,7 @@ import Bounties from './pages/Bounties';
 import Ledger from './pages/Ledger';
 import Market from './pages/Market';
 import Publish from './pages/Publish';
+import Real from './pages/Real';
 import Run from './pages/Run';
 import Twin from './pages/Twin';
 
@@ -18,6 +19,7 @@ const NAV = [
   { to: '/bounties', label: '悬赏市场', icon: Target, title: '悬赏市场', sub: '其他孪生发布的缺口需求，用通过验证的工具接单' },
   { to: '/ledger', label: '链上账本', icon: Blocks, title: '链上账本', sub: '只记支付与哈希，数据从不上链' },
   { to: '/twin', label: '我的孪生', icon: Bot, title: '我的孪生', sub: '既是雇主，也是工人' },
+  { to: '/real', label: '真实后端', icon: Server, title: '真实后端', sub: '真实横评的能力卡，以及连接本机 Tagora API 的加密调用' },
 ];
 
 function Boot({ done, total, name }: { done: number; total: number; name: string }) {
@@ -115,6 +117,7 @@ function Shell() {
             <Route path="/bounties" element={<Bounties />} />
             <Route path="/ledger" element={<Ledger />} />
             <Route path="/twin" element={<Twin />} />
+            <Route path="/real" element={<Real />} />
             <Route path="*" element={<Market />} />
           </Routes>
         </div>

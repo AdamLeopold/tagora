@@ -3,9 +3,13 @@
 可验证的 AI 执行市场：社区贡献工具，平台实测行为，数据在硬件隔离区内加密处理、用完即销毁。
 
 ```
-web/   宣传官网（Vite + Three.js + GSAP + Lenis）
-app/   产品 Demo（Vite + React + TypeScript）
+web/        宣传官网（Vite + Three.js + GSAP + Lenis），含阶段 0 横评报告 report.html
+app/        产品 Demo（Vite + React + TypeScript），“真实后端”页可连接本机 API
+platform/   后端（Python）：沙箱、验证引擎、PDF 横评、路由、定价、402 结算、FHE、API、MCP
+docs/PLAN.md  初步计划执行看板与进度日志
 ```
+
+线上地址：官网 https://adamleopold.github.io/tagora/ · 横评报告 https://adamleopold.github.io/tagora/report.html · Demo https://adamleopold.github.io/tagora/app/
 
 ## 本地运行
 
@@ -20,6 +24,34 @@ npm --prefix app install && npm --prefix app run dev   # http://localhost:5174
 - `app`：`VITE_WEB_URL`（默认 `http://localhost:5173`）
 
 构建：`npm --prefix web run build`、`npm --prefix app run build`，产物在各自的 `dist/`，可直接放到任何静态托管。
+
+## 后端平台（platform/）
+
+```bash
+cd platform
+uv venv --python 3.11 .venv && uv pip install --python .venv/bin/python -e ".[bench,dev,fhe]"
+.venv/bin/python -m pytest -q                                  # 32 个测试
+.venv/bin/python benchmarks/pdf/run.py --split public          # 横评（--split hidden 用本机私有题库）
+.venv/bin/python -m tagora.sim                                 # 先验校准、路由与承保利润率模拟
+.venv/bin/python benchmarks/fhe/run.py                         # CKKS 密文推理参数网格
+.venv/bin/python -m tagora.bootstrap --split hidden --fresh    # 把能力卡装进注册表
+.venv/bin/uvicorn tagora.api:app --port 8787                   # API
+claude mcp add tagora -- $PWD/.venv/bin/python -m tagora.mcp_server   # 接入 Claude Code
+```
+
+| 模块 | 作用 |
+| --- | --- |
+| `tagora/sandbox` | 每次调用一个子进程；CPython 审计钩子拦截出网、子进程、越权写文件，记录读取 home |
+| `tagora/verify` | L1 静态分析 → L2 隐藏题库 → L3 边界 → L4 对抗/出网 → L5 资源 → 能力卡（绑定代码哈希 × 硬件类别） |
+| `tagora/router.py` | 按“有效价格 = 标价 ÷ 实测成功率”路由，成功率用校准过的 Beta 先验平滑 |
+| `tagora/detect.py` | 在调用方本机识别 PDF 场景，只把场景标签发给路由器 |
+| `tagora/pricing.py` | 按结果收费的承保报价 |
+| `tagora/enclave.py` | 模拟 TEE：Ed25519 签名的远程证明 + X25519/HKDF/AES-256-GCM 密封 |
+| `tagora/settlement.py` | x402 风格的 402 → X-PAYMENT 支付流程（模拟 USDC） |
+| `tagora/fhe.py` | 密文档：训练小模型，TenSEAL CKKS 加密推理 |
+| `tagora/api.py` / `mcp_server.py` | HTTP API 与 MCP 网关 |
+
+`platform/Dockerfile` 构建 API 镜像（CI 中构建并冒烟测试）。
 
 ## 官网（web/）
 

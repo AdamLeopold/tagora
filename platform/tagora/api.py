@@ -112,6 +112,14 @@ def create_app(var_dir: str | Path | None = None) -> FastAPI:
     app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"], expose_headers=["X-PAYMENT-RESPONSE"])
     app.state.registry, app.state.ledger, app.state.bank, app.state.root = registry, ledger, bank, root
 
+    @app.middleware("http")
+    async def private_network(request: Request, call_next):
+        # let pages served from the public demo reach a locally running API (Private Network Access preflights)
+        response = await call_next(request)
+        if request.headers.get("access-control-request-private-network"):
+            response.headers["Access-Control-Allow-Private-Network"] = "true"
+        return response
+
     @app.get("/v1/health")
     def health():
         ok, bad, why = ledger.verify()
