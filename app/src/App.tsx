@@ -1,8 +1,9 @@
-import { ArrowLeft, Blocks, Bot, LockKeyhole, Menu, PackagePlus, RotateCcw, Server, Store, Target, Wallet, X } from 'lucide-react';
+import { ArrowLeft, Blocks, Bot, LockKeyhole, Menu, MessagesSquare, PackagePlus, RotateCcw, Server, Store, Target, Wallet, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { NavLink, Route, Routes, useLocation } from 'react-router-dom';
 import { StoreProvider, useStore } from './lib/store';
 import Bounties from './pages/Bounties';
+import Chat from './pages/Chat';
 import Ledger from './pages/Ledger';
 import Market from './pages/Market';
 import Publish from './pages/Publish';
@@ -13,7 +14,8 @@ import Twin from './pages/Twin';
 const WEB_URL = import.meta.env.VITE_WEB_URL || 'http://localhost:5173';
 
 const NAV = [
-  { to: '/', label: '工具市场', icon: Store, title: '工具市场', sub: '每个 Worker 都附带平台实测的能力卡，路由只看它' },
+  { to: '/', label: '对话规划', icon: MessagesSquare, title: '对话规划', sub: '说出你要做的事，孪生给出流程图、Worker 与费用，每一步都能换' },
+  { to: '/market', label: '工具市场', icon: Store, title: '工具市场', sub: '每个 Worker 都附带平台实测的能力卡，路由只看它' },
   { to: '/run', label: '加密调用', icon: LockKeyhole, title: '加密调用', sub: '远程证明 → 密钥协商 → 隔离区执行 → 销毁 → 上链' },
   { to: '/publish', label: '发布工具', icon: PackagePlus, title: '发布工具', sub: '提交代码，六层实测，拿到能力卡后上架' },
   { to: '/bounties', label: '悬赏市场', icon: Target, title: '悬赏市场', sub: '其他孪生发布的缺口需求，用通过验证的工具接单' },
@@ -45,7 +47,9 @@ function Shell() {
   const loc = useLocation();
   const [open, setOpen] = useState(false);
   const page = NAV.find((n) => (n.to === '/' ? loc.pathname === '/' : loc.pathname.startsWith(n.to))) ?? NAV[0];
-  useEffect(() => setOpen(false), [loc.pathname]);
+  useEffect(() => {
+    setOpen(false);
+  }, [loc.pathname]);
 
   return (
     <div className={`shell ${open ? 'nav-open' : ''}`}>
@@ -111,7 +115,8 @@ function Shell() {
         </header>
         <div className="content">
           <Routes>
-            <Route path="/" element={<Market />} />
+            <Route path="/" element={<Chat />} />
+            <Route path="/market" element={<Market />} />
             <Route path="/run" element={<Run />} />
             <Route path="/publish" element={<Publish />} />
             <Route path="/bounties" element={<Bounties />} />

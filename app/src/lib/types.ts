@@ -100,5 +100,10 @@ export interface AppState {
   ledger: Block[];
   wallet: Wallet;
   runs: RunRecord[];
-  me: { name: string; computeSharing: boolean };
+  me: {
+    name: string;
+    computeSharing: boolean;
+    persona?: 'auto' | 'price' | 'speed' | 'balanced' | 'rich';
+    prefs?: { q: number; c: number; t: number; n: number };
+  };
 }

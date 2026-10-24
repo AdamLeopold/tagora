@@ -223,7 +223,7 @@ export default function Publish() {
                 <div>
                   <b>已上架，并写入链上账本</b>
                   <p>
-                    <Link to="/">去市场查看</Link>
+                    <Link to="/market">去市场查看</Link>
                     {openBounties.length > 0 && (
                       <>
                         {' · '}
