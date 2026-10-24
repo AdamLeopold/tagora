@@ -1,0 +1,887 @@
+{
+ "generated": "2026-10-24",
+ "suite": {
+  "category": "pdf",
+  "version": "pdf-2026.10",
+  "split": "hidden",
+  "cases": 30,
+  "pass_threshold": 0.9
+ },
+ "scenarios": {
+  "plain": "单栏正文",
+  "multicol": "双栏",
+  "table": "表格",
+  "chinese": "中文",
+  "scanned": "扫描件"
+ },
+ "hardware": {
+  "hardware_label": "通用 ARM CPU（每 vCPU）",
+  "usd_per_cpu_hour": 0.03625,
+  "price_source": "AWS c7g.large on-demand us-east-1, $0.0725/h for 2 vCPU (DoiT, 2026)"
+ },
+ "tools": [
+  {
+   "name": "tagora-hybrid",
+   "version": "0.2",
+   "author": "Tagora 参考实现",
+   "license": "MIT",
+   "upstream": "https://github.com/AdamLeopold/tagora",
+   "claim": "组合实现：按版面分栏排序文本块，表格转 Markdown；无文本层的页面先纠偏、按行切分再 OCR。",
+   "overall": 0.9981,
+   "success_rate": 1.0,
+   "by_scenario": {
+    "plain": 1.0,
+    "multicol": 0.9961,
+    "table": 0.9937,
+    "chinese": 1.0,
+    "scanned": 0.9983
+   },
+   "robustness": 1.0,
+   "edges": [
+    {
+     "name": "空白页",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "页面旋转 90°",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "AES-256 加密（空用户密码）",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "文件被截断",
+     "pass": true,
+     "note": ""
+    }
+   ],
+   "egress": false,
+   "license_warnings": [],
+   "adversarial": [
+    {
+     "name": "injection",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.738,
+     "error": ""
+    },
+    {
+     "name": "blank1000",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.722,
+     "error": ""
+    }
+   ],
+   "p50_s": 1.3735,
+   "cpu_mean_s": 4.9812,
+   "large": {
+    "units": 16,
+    "ok": true,
+    "timed_out": false,
+    "wall_s": 1.896,
+    "cpu_s": 6.027,
+    "rss_mb": 580.6,
+    "cpu_s_per_unit": 0.37671
+   },
+   "price_usd": 0.002,
+   "compute_usd_per_case": 5.015791599537036e-05,
+   "compute_usd_per_verified": 5.015791599537036e-05,
+   "known_failures": [],
+   "code_hash": "2f2ed1bd17affcb8abffac3a77c70bb607c1c87f05c44bc5d02498878b4f6036",
+   "cases": 30
+  },
+  {
+   "name": "pymupdf4llm",
+   "version": "2.0",
+   "author": "Artifex",
+   "license": "AGPL-3.0",
+   "upstream": "https://github.com/pymupdf/pymupdf4llm",
+   "claim": "把 PDF 转成适合 LLM 与 RAG 的 Markdown，识别标题、表格与多栏排版。",
+   "overall": 0.8561,
+   "success_rate": 0.6333,
+   "by_scenario": {
+    "plain": 1.0,
+    "multicol": 0.7171,
+    "table": 1.0,
+    "chinese": 1.0,
+    "scanned": 0.6962
+   },
+   "robustness": 0.75,
+   "edges": [
+    {
+     "name": "空白页",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "页面旋转 90°",
+     "pass": false,
+     "note": ""
+    },
+    {
+     "name": "AES-256 加密（空用户密码）",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "文件被截断",
+     "pass": true,
+     "note": ""
+    }
+   ],
+   "egress": false,
+   "license_warnings": [
+    "许可证 AGPL-3.0：托管时须向调用方提供源码（Tagora 工具默认开源，满足要求）"
+   ],
+   "adversarial": [
+    {
+     "name": "injection",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.831,
+     "error": ""
+    },
+    {
+     "name": "blank1000",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 29.899,
+     "error": ""
+    }
+   ],
+   "p50_s": 1.6247,
+   "cpu_mean_s": 5.8188,
+   "large": {
+    "units": 16,
+    "ok": true,
+    "timed_out": false,
+    "wall_s": 2.384,
+    "cpu_s": 6.503,
+    "rss_mb": 630.0,
+    "cpu_s_per_unit": 0.40642
+   },
+   "price_usd": 0.002,
+   "compute_usd_per_case": 5.859227700231481e-05,
+   "compute_usd_per_verified": 9.251412158260233e-05,
+   "known_failures": [
+    "页面旋转 90°"
+   ],
+   "code_hash": "2d6a83df56dbaaf1dfa929e1f17946a40b0336b49374f6ab9882d2028a1a590d",
+   "cases": 30
+  },
+  {
+   "name": "pymupdf",
+   "version": "2.0",
+   "author": "Artifex",
+   "license": "AGPL-3.0",
+   "upstream": "https://github.com/pymupdf/PyMuPDF",
+   "claim": "高性能的 PDF 数据提取、分析、转换与处理库。",
+   "overall": 0.8064,
+   "success_rate": 0.7333,
+   "by_scenario": {
+    "plain": 1.0,
+    "multicol": 0.7964,
+    "table": 0.9937,
+    "chinese": 1.0,
+    "scanned": 0.0
+   },
+   "robustness": 1.0,
+   "edges": [
+    {
+     "name": "空白页",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "页面旋转 90°",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "AES-256 加密（空用户密码）",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "文件被截断",
+     "pass": true,
+     "note": ""
+    }
+   ],
+   "egress": false,
+   "license_warnings": [
+    "许可证 AGPL-3.0：托管时须向调用方提供源码（Tagora 工具默认开源，满足要求）"
+   ],
+   "adversarial": [
+    {
+     "name": "injection",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.713,
+     "error": ""
+    },
+    {
+     "name": "blank1000",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 29.771,
+     "error": ""
+    }
+   ],
+   "p50_s": 1.2609,
+   "cpu_mean_s": 1.8747,
+   "large": {
+    "units": 16,
+    "ok": true,
+    "timed_out": false,
+    "wall_s": 1.874,
+    "cpu_s": 5.95,
+    "rss_mb": 582.9,
+    "cpu_s_per_unit": 0.37185
+   },
+   "price_usd": 0.0008,
+   "compute_usd_per_case": 1.8877384861111112e-05,
+   "compute_usd_per_verified": 2.57418884469697e-05,
+   "known_failures": [
+    "扫描件（纯图像）"
+   ],
+   "code_hash": "2695b5fc9a2890400ce15da85fa513a4885cbe43de48bec7002d7657af8296ef",
+   "cases": 30
+  },
+  {
+   "name": "pypdf",
+   "version": "6.1",
+   "author": "py-pdf",
+   "license": "BSD-3-Clause",
+   "upstream": "https://github.com/py-pdf/pypdf",
+   "claim": "纯 Python 的 PDF 库：拆分、合并、裁剪、转换页面，并能提取文本。",
+   "overall": 0.7306,
+   "success_rate": 0.5333,
+   "by_scenario": {
+    "plain": 1.0,
+    "multicol": 0.7964,
+    "table": 0.52,
+    "chinese": 1.0,
+    "scanned": 0.0
+   },
+   "robustness": 1.0,
+   "edges": [
+    {
+     "name": "空白页",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "页面旋转 90°",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "AES-256 加密（空用户密码）",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "文件被截断",
+     "pass": true,
+     "note": ""
+    }
+   ],
+   "egress": false,
+   "license_warnings": [],
+   "adversarial": [
+    {
+     "name": "injection",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.158,
+     "error": ""
+    },
+    {
+     "name": "blank1000",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.25,
+     "error": ""
+    }
+   ],
+   "p50_s": 0.1823,
+   "cpu_mean_s": 0.1802,
+   "large": {
+    "units": 16,
+    "ok": true,
+    "timed_out": false,
+    "wall_s": 0.198,
+    "cpu_s": 0.198,
+    "rss_mb": 61.9,
+    "cpu_s_per_unit": 0.0124
+   },
+   "price_usd": 0.0005,
+   "compute_usd_per_case": 1.8141252083333334e-06,
+   "compute_usd_per_verified": 3.4014847656250003e-06,
+   "known_failures": [
+    "表格结构",
+    "扫描件（纯图像）"
+   ],
+   "code_hash": "d1262413040c58f609daee429d511cd585f3017090a03db2b69c33e7a2cbbc16",
+   "cases": 30
+  },
+  {
+   "name": "pypdf-layout",
+   "version": "6.1",
+   "author": "py-pdf",
+   "license": "BSD-3-Clause",
+   "upstream": "https://github.com/py-pdf/pypdf",
+   "claim": "pypdf 的版面模式：尽量保留原始页面的空间布局。",
+   "overall": 0.7036,
+   "success_rate": 0.4333,
+   "by_scenario": {
+    "plain": 1.0,
+    "multicol": 0.6275,
+    "table": 0.52,
+    "chinese": 1.0,
+    "scanned": 0.0
+   },
+   "robustness": 1.0,
+   "edges": [
+    {
+     "name": "空白页",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "页面旋转 90°",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "AES-256 加密（空用户密码）",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "文件被截断",
+     "pass": true,
+     "note": ""
+    }
+   ],
+   "egress": false,
+   "license_warnings": [],
+   "adversarial": [
+    {
+     "name": "injection",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.157,
+     "error": ""
+    },
+    {
+     "name": "blank1000",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.181,
+     "error": ""
+    }
+   ],
+   "p50_s": 0.1799,
+   "cpu_mean_s": 0.1794,
+   "large": {
+    "units": 16,
+    "ok": true,
+    "timed_out": false,
+    "wall_s": 0.191,
+    "cpu_s": 0.191,
+    "rss_mb": 62.1,
+    "cpu_s_per_unit": 0.01197
+   },
+   "price_usd": 0.0006,
+   "compute_usd_per_case": 1.8063270949074075e-06,
+   "compute_usd_per_verified": 4.168447142094017e-06,
+   "known_failures": [
+    "表格结构",
+    "扫描件（纯图像）"
+   ],
+   "code_hash": "b33ed093e9ad39b9ee5ef318a4b5e0dc2d87a31b3aef7420140a6c3d29b1e7a5",
+   "cases": 30
+  },
+  {
+   "name": "markitdown",
+   "version": "0.1",
+   "author": "Microsoft",
+   "license": "MIT",
+   "upstream": "https://github.com/microsoft/markitdown",
+   "claim": "把 PDF、Office 文档等各种文件转换成 Markdown，供 LLM 和文本分析流程使用。",
+   "overall": 0.6994,
+   "success_rate": 0.5,
+   "by_scenario": {
+    "plain": 1.0,
+    "multicol": 0.6566,
+    "table": 0.7773,
+    "chinese": 1.0,
+    "scanned": 0.0
+   },
+   "robustness": 0.75,
+   "edges": [
+    {
+     "name": "空白页",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "页面旋转 90°",
+     "pass": false,
+     "note": ""
+    },
+    {
+     "name": "AES-256 加密（空用户密码）",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "文件被截断",
+     "pass": true,
+     "note": ""
+    }
+   ],
+   "egress": false,
+   "license_warnings": [],
+   "adversarial": [
+    {
+     "name": "injection",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.392,
+     "error": ""
+    },
+    {
+     "name": "blank1000",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.486,
+     "error": ""
+    }
+   ],
+   "p50_s": 0.5045,
+   "cpu_mean_s": 0.5643,
+   "large": {
+    "units": 16,
+    "ok": true,
+    "timed_out": false,
+    "wall_s": 1.23,
+    "cpu_s": 1.341,
+    "rss_mb": 120.2,
+    "cpu_s_per_unit": 0.0838
+   },
+   "price_usd": 0.001,
+   "compute_usd_per_case": 5.681933414351852e-06,
+   "compute_usd_per_verified": 1.1363866828703703e-05,
+   "known_failures": [
+    "扫描件（纯图像）",
+    "页面旋转 90°"
+   ],
+   "code_hash": "f18a87dfa95544ee979b2d44c29bf6cee741d28e63f3cd019a1933fd31c8eb8b",
+   "cases": 30
+  },
+  {
+   "name": "pdfplumber",
+   "version": "0.11",
+   "author": "jsvine",
+   "license": "MIT",
+   "upstream": "https://github.com/jsvine/pdfplumber",
+   "claim": "获取每个字符、矩形和线条的详细信息，并能轻松提取文本和表格。",
+   "overall": 0.6856,
+   "success_rate": 0.5,
+   "by_scenario": {
+    "plain": 1.0,
+    "multicol": 0.6272,
+    "table": 0.72,
+    "chinese": 1.0,
+    "scanned": 0.0
+   },
+   "robustness": 0.75,
+   "edges": [
+    {
+     "name": "空白页",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "页面旋转 90°",
+     "pass": false,
+     "note": ""
+    },
+    {
+     "name": "AES-256 加密（空用户密码）",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "文件被截断",
+     "pass": true,
+     "note": ""
+    }
+   ],
+   "egress": false,
+   "license_warnings": [],
+   "adversarial": [
+    {
+     "name": "injection",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.123,
+     "error": ""
+    },
+    {
+     "name": "blank1000",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.185,
+     "error": ""
+    }
+   ],
+   "p50_s": 0.1432,
+   "cpu_mean_s": 0.1477,
+   "large": {
+    "units": 16,
+    "ok": true,
+    "timed_out": false,
+    "wall_s": 0.73,
+    "cpu_s": 0.73,
+    "rss_mb": 154.7,
+    "cpu_s_per_unit": 0.04561
+   },
+   "price_usd": 0.0015,
+   "compute_usd_per_case": 1.4871055671296296e-06,
+   "compute_usd_per_verified": 2.974211134259259e-06,
+   "known_failures": [
+    "扫描件（纯图像）",
+    "页面旋转 90°"
+   ],
+   "code_hash": "2affad701a439817f383e2070d0d8e62db8a66b1093854f1085a82112b6cf943",
+   "cases": 30
+  },
+  {
+   "name": "pdfminer.six",
+   "version": "20260107",
+   "author": "pdfminer",
+   "license": "MIT",
+   "upstream": "https://github.com/pdfminer/pdfminer.six",
+   "claim": "社区维护的 PDF 解析器，专注于获取和分析文本数据。",
+   "overall": 0.6583,
+   "success_rate": 0.4333,
+   "by_scenario": {
+    "plain": 1.0,
+    "multicol": 0.6566,
+    "table": 0.52,
+    "chinese": 1.0,
+    "scanned": 0.0
+   },
+   "robustness": 0.75,
+   "edges": [
+    {
+     "name": "空白页",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "页面旋转 90°",
+     "pass": false,
+     "note": ""
+    },
+    {
+     "name": "AES-256 加密（空用户密码）",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "文件被截断",
+     "pass": true,
+     "note": ""
+    }
+   ],
+   "egress": false,
+   "license_warnings": [],
+   "adversarial": [
+    {
+     "name": "injection",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.099,
+     "error": ""
+    },
+    {
+     "name": "blank1000",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.142,
+     "error": ""
+    }
+   ],
+   "p50_s": 0.1189,
+   "cpu_mean_s": 0.1168,
+   "large": {
+    "units": 16,
+    "ok": true,
+    "timed_out": false,
+    "wall_s": 0.323,
+    "cpu_s": 0.323,
+    "rss_mb": 39.9,
+    "cpu_s_per_unit": 0.02021
+   },
+   "price_usd": 0.0008,
+   "compute_usd_per_case": 1.1763571412037035e-06,
+   "compute_usd_per_verified": 2.7146703258547e-06,
+   "known_failures": [
+    "表格结构",
+    "扫描件（纯图像）",
+    "页面旋转 90°"
+   ],
+   "code_hash": "0a2a0dbfc6f0916c7bc4afdc2da73efc1018d2ee3f9cb7187f6387075f44fa86",
+   "cases": 30
+  },
+  {
+   "name": "rapidocr",
+   "version": "1.4",
+   "author": "RapidAI",
+   "license": "Apache-2.0",
+   "upstream": "https://github.com/RapidAI/RapidOCR",
+   "claim": "基于 ONNXRuntime 的跨平台 OCR，开箱即用，支持中英文。",
+   "overall": 0.5951,
+   "success_rate": 0.2,
+   "by_scenario": {
+    "plain": 0.5967,
+    "multicol": 0.3553,
+    "table": 0.4756,
+    "chinese": 0.9889,
+    "scanned": 0.678
+   },
+   "robustness": 0.5,
+   "edges": [
+    {
+     "name": "空白页",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "页面旋转 90°",
+     "pass": false,
+     "note": ""
+    },
+    {
+     "name": "AES-256 加密（空用户密码）",
+     "pass": false,
+     "note": ""
+    },
+    {
+     "name": "文件被截断",
+     "pass": true,
+     "note": ""
+    }
+   ],
+   "egress": false,
+   "license_warnings": [],
+   "adversarial": [
+    {
+     "name": "injection",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 1.721,
+     "error": ""
+    },
+    {
+     "name": "blank1000",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 40.785,
+     "error": ""
+    }
+   ],
+   "p50_s": 13.886,
+   "cpu_mean_s": 29.6283,
+   "large": {
+    "units": 16,
+    "ok": true,
+    "timed_out": false,
+    "wall_s": 37.174,
+    "cpu_s": 249.361,
+    "rss_mb": 2132.1,
+    "cpu_s_per_unit": 15.58505
+   },
+   "price_usd": 0.004,
+   "compute_usd_per_case": 0.0002983406597916667,
+   "compute_usd_per_verified": 0.0014917032989583334,
+   "known_failures": [
+    "单栏英文正文",
+    "双栏排版（阅读顺序）",
+    "表格结构",
+    "页面旋转 90°",
+    "AES-256 加密（空用户密码）"
+   ],
+   "code_hash": "0b1592779d2f84bfb81925d7a5043373708bef48fa446f9e42ad971d0ec6ee50",
+   "cases": 30
+  }
+ ],
+ "tuning": {
+  "v01_public": {
+   "plain": 1.0,
+   "multicol": 0.6557,
+   "table": 1.0,
+   "chinese": 1.0,
+   "scanned": 0.6758
+  },
+  "v02_public": {
+   "plain": 1.0,
+   "multicol": 1.0,
+   "table": 1.0,
+   "chinese": 1.0,
+   "scanned": 0.9974
+  },
+  "v02_hidden": {
+   "plain": 1.0,
+   "multicol": 0.9961,
+   "table": 0.9937,
+   "chinese": 1.0,
+   "scanned": 0.9983
+  },
+  "v01_overall": 0.893,
+  "v02_public_overall": 0.9996,
+  "v02_hidden_overall": 0.9981
+ },
+ "sim": {
+  "calibration": {
+   "best": {
+    "a": 0.1,
+    "b": 0.0,
+    "log_loss": 0.14528462230504197,
+    "brier": 0.040992693374134644
+   },
+   "laplace": {
+    "a": 1.0,
+    "b": 1.0,
+    "log_loss": 0.3431956204763132,
+    "brier": 0.08796296296296297
+   },
+   "mle_no_prior": {
+    "a": 0.0,
+    "b": 0.0,
+    "log_loss": 0.40439062279982013,
+    "brier": 0.04259254074167407
+   },
+   "top5": [
+    {
+     "a": 0.1,
+     "b": 0.0,
+     "log_loss": 0.14528462230504197,
+     "brier": 0.040992693374134644
+    },
+    {
+     "a": 0.25,
+     "b": 0.0,
+     "log_loss": 0.15205739055312112,
+     "brier": 0.04211248285371248
+    },
+    {
+     "a": 0.1,
+     "b": 0.1,
+     "log_loss": 0.1685605564967999,
+     "brier": 0.04216406489133762
+    },
+    {
+     "a": 0.25,
+     "b": 0.1,
+     "log_loss": 0.17229842104972506,
+     "brier": 0.04282313096256057
+    },
+    {
+     "a": 0.5,
+     "b": 0.0,
+     "log_loss": 0.18118518806764278,
+     "brier": 0.04992592592641482
+    }
+   ]
+  },
+  "routing": {
+   "effective": {
+    "requests": 30,
+    "success_rate": 1.0,
+    "spend_usd": 0.0314,
+    "usd_per_verified_result": 0.001047,
+    "attempts_per_request": 1.133
+   },
+   "cheapest": {
+    "requests": 30,
+    "success_rate": 0.5666666666666667,
+    "spend_usd": 0.0338,
+    "usd_per_verified_result": 0.001988,
+    "attempts_per_request": 1.9
+   },
+   "best_overall": {
+    "requests": 30,
+    "success_rate": 1.0,
+    "spend_usd": 0.06,
+    "usd_per_verified_result": 0.002,
+    "attempts_per_request": 1.0
+   },
+   "random": {
+    "requests": 30,
+    "success_rate": 0.7,
+    "spend_usd": 0.0796,
+    "usd_per_verified_result": 0.00379,
+    "attempts_per_request": 1.867
+   }
+  },
+  "underwriting": {
+   "margins": [
+    {
+     "margin": 0.0,
+     "profit_usd": -0.000593,
+     "revenue_usd": 0.030807,
+     "p_loss": 0.538
+    },
+    {
+     "margin": 0.05,
+     "profit_usd": 0.000947,
+     "revenue_usd": 0.032347,
+     "p_loss": 0.371
+    },
+    {
+     "margin": 0.1,
+     "profit_usd": 0.002487,
+     "revenue_usd": 0.033887,
+     "p_loss": 0.223
+    },
+    {
+     "margin": 0.15,
+     "profit_usd": 0.004028,
+     "revenue_usd": 0.035428,
+     "p_loss": 0.1195
+    },
+    {
+     "margin": 0.2,
+     "profit_usd": 0.005568,
+     "revenue_usd": 0.036968,
+     "p_loss": 0.065
+    },
+    {
+     "margin": 0.3,
+     "profit_usd": 0.008649,
+     "revenue_usd": 0.040049,
+     "p_loss": 0.011
+    },
+    {
+     "margin": 0.5,
+     "profit_usd": 0.01481,
+     "revenue_usd": 0.04621,
+     "p_loss": 0.0
+    }
+   ],
+   "recommended_margin": 0.3,
+   "requests": 30
+  }
+ }
+}

@@ -1985,3 +1985,14 @@ strong {
     transition-duration: 0.01ms !important;
   }
 }
+
+.nav-links a.nav-report {
+  color: var(--cyan);
+}
+
+.rm-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--cyan);
+}
