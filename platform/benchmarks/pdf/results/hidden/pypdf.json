@@ -1,0 +1,484 @@
+{
+ "card": {
+  "schema": "tagora.card/v1",
+  "tool": "pypdf@6.1",
+  "name": "pypdf",
+  "version": "6.1",
+  "author": "py-pdf",
+  "license": "BSD-3-Clause",
+  "upstream": "https://github.com/py-pdf/pypdf",
+  "code_hash": "d1262413040c58f609daee429d511cd585f3017090a03db2b69c33e7a2cbbc16",
+  "hardware": "cpu-arm64",
+  "tier": "open",
+  "suite": {
+   "category": "pdf",
+   "version": "pdf-2026.10",
+   "split": "hidden",
+   "cases": 30,
+   "pass_threshold": 0.9
+  },
+  "verified_at": "2026-10-24T06:31:52+00:00",
+  "claim": {
+   "text": "纯 Python 的 PDF 库：拆分、合并、裁剪、转换页面，并能提取文本。",
+   "accuracy": null
+  },
+  "quality": {
+   "overall": 0.7306,
+   "mean_case_score": 0.6633,
+   "by_scenario": {
+    "plain": 1.0,
+    "multicol": 0.7964,
+    "table": 0.52,
+    "chinese": 1.0,
+    "scanned": 0.0
+   },
+   "success_rate": 0.5333
+  },
+  "robustness": {
+   "score": 1.0,
+   "edges": [
+    {
+     "name": "空白页",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "页面旋转 90°",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "AES-256 加密（空用户密码）",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "文件被截断",
+     "pass": true,
+     "note": ""
+    }
+   ]
+  },
+  "security": {
+   "static": [],
+   "runtime_events": [],
+   "egress": false,
+   "adversarial": [
+    {
+     "name": "injection",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.158,
+     "error": ""
+    },
+    {
+     "name": "blank1000",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.25,
+     "error": ""
+    }
+   ],
+   "hosting_blocked": false
+  },
+  "performance": {
+   "wall_p50_s": 0.1823,
+   "wall_p95_s": 0.1853,
+   "cpu_mean_s": 0.1802,
+   "rss_peak_mb": 92.5,
+   "large": {
+    "units": 16,
+    "ok": true,
+    "timed_out": false,
+    "wall_s": 0.198,
+    "cpu_s": 0.198,
+    "rss_mb": 61.9,
+    "cpu_s_per_unit": 0.0124
+   },
+   "errors": 0
+  },
+  "cost": {
+   "hardware_label": "通用 ARM CPU（每 vCPU）",
+   "usd_per_cpu_hour": 0.03625,
+   "price_source": "AWS c7g.large on-demand us-east-1, $0.0725/h for 2 vCPU (DoiT, 2026)",
+   "compute_usd_per_case": 1.8141252083333334e-06,
+   "compute_usd_per_verified_result": 3.4014847656250003e-06,
+   "list_price_usd": 0.0005,
+   "effective_price_usd": 0.0009375000000000001
+  },
+  "known_failures": [
+   "表格结构",
+   "扫描件（纯图像）"
+  ],
+  "recheck": {
+   "count": 0,
+   "trend": [
+    0.7306
+   ],
+   "last": "2026-10-24T06:31:52+00:00"
+  },
+  "verify_seconds": 2.3
+ },
+ "cases": [
+  {
+   "id": "plain-3265c1d2",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1853,
+   "cpu_s": 0.1851,
+   "rss_mb": 88.015625,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "plain-f8a2b97d",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1845,
+   "cpu_s": 0.1831,
+   "rss_mb": 91.953125,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "plain-a16dab2f",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1824,
+   "cpu_s": 0.1819,
+   "rss_mb": 85.34375,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "plain-f06bd92f",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1823,
+   "cpu_s": 0.1819,
+   "rss_mb": 92.53125,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "plain-ca1a2ae3",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1827,
+   "cpu_s": 0.1825,
+   "rss_mb": 85.078125,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "plain-efdb25c2",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1807,
+   "cpu_s": 0.1805,
+   "rss_mb": 82.703125,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-e2828479",
+   "scenario": "multicol",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1828,
+   "cpu_s": 0.1826,
+   "rss_mb": 79.609375,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-cc46ff53",
+   "scenario": "multicol",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1817,
+   "cpu_s": 0.1815,
+   "rss_mb": 77.09375,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-08ee4b64",
+   "scenario": "multicol",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1817,
+   "cpu_s": 0.1815,
+   "rss_mb": 85.953125,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-ed36a1ed",
+   "scenario": "multicol",
+   "score": 0.3899,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1826,
+   "cpu_s": 0.1824,
+   "rss_mb": 88.203125,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-04642e5c",
+   "scenario": "multicol",
+   "score": 0.3883,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1835,
+   "cpu_s": 0.1833,
+   "rss_mb": 83.046875,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-489a732e",
+   "scenario": "multicol",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1772,
+   "cpu_s": 0.1771,
+   "rss_mb": 72.25,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "table-a6e7bc91",
+   "scenario": "table",
+   "score": 0.52,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1826,
+   "cpu_s": 0.1824,
+   "rss_mb": 89.71875,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "table-7aeba429",
+   "scenario": "table",
+   "score": 0.52,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1805,
+   "cpu_s": 0.18,
+   "rss_mb": 86.765625,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "table-4a9dc6a8",
+   "scenario": "table",
+   "score": 0.52,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1828,
+   "cpu_s": 0.1824,
+   "rss_mb": 87.671875,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "table-d446ad4f",
+   "scenario": "table",
+   "score": 0.52,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1782,
+   "cpu_s": 0.1777,
+   "rss_mb": 75.203125,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "table-f5cc5079",
+   "scenario": "table",
+   "score": 0.52,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1786,
+   "cpu_s": 0.1784,
+   "rss_mb": 80.734375,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "table-694bdd05",
+   "scenario": "table",
+   "score": 0.52,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1817,
+   "cpu_s": 0.178,
+   "rss_mb": 87.8125,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-2774649b",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1827,
+   "cpu_s": 0.1825,
+   "rss_mb": 87.75,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-f38a0bea",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1823,
+   "cpu_s": 0.182,
+   "rss_mb": 83.46875,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-25da4778",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.188,
+   "cpu_s": 0.1876,
+   "rss_mb": 83.734375,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-b69bf9f1",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1853,
+   "cpu_s": 0.1849,
+   "rss_mb": 87.21875,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-03599252",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1838,
+   "cpu_s": 0.1836,
+   "rss_mb": 85.34375,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-a7d8812c",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1827,
+   "cpu_s": 0.1825,
+   "rss_mb": 78.5625,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-9640d387",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1741,
+   "cpu_s": 0.174,
+   "rss_mb": 79.90625,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-06a72de7",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1732,
+   "cpu_s": 0.173,
+   "rss_mb": 86.90625,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-29c4aef1",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.176,
+   "cpu_s": 0.1758,
+   "rss_mb": 87.625,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-3337a662",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1723,
+   "cpu_s": 0.1722,
+   "rss_mb": 88.03125,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-65380681",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1725,
+   "cpu_s": 0.1723,
+   "rss_mb": 88.421875,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-8ef4e5e4",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1722,
+   "cpu_s": 0.172,
+   "rss_mb": 79.234375,
+   "events": 0,
+   "timed_out": false
+  }
+ ]
+}

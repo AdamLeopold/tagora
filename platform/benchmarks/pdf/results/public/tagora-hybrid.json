@@ -1,0 +1,247 @@
+{
+ "card": {
+  "schema": "tagora.card/v1",
+  "tool": "tagora-hybrid@0.2",
+  "name": "tagora-hybrid",
+  "version": "0.2",
+  "author": "Tagora 参考实现",
+  "license": "MIT",
+  "upstream": "https://github.com/AdamLeopold/tagora",
+  "code_hash": "2f2ed1bd17affcb8abffac3a77c70bb607c1c87f05c44bc5d02498878b4f6036",
+  "hardware": "cpu-arm64",
+  "tier": "open",
+  "suite": {
+   "category": "pdf",
+   "version": "pdf-2026.10",
+   "split": "public",
+   "cases": 10,
+   "pass_threshold": 0.9
+  },
+  "verified_at": "2026-10-24T06:29:02+00:00",
+  "claim": {
+   "text": "组合实现：按版面分栏排序文本块，表格转 Markdown；无文本层的页面先纠偏、按行切分再 OCR。",
+   "accuracy": 0.95
+  },
+  "quality": {
+   "overall": 0.9996,
+   "mean_case_score": 0.9995,
+   "by_scenario": {
+    "plain": 1.0,
+    "multicol": 1.0,
+    "table": 1.0,
+    "chinese": 1.0,
+    "scanned": 0.9974
+   },
+   "success_rate": 1.0
+  },
+  "robustness": {
+   "score": 1.0,
+   "edges": [
+    {
+     "name": "空白页",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "页面旋转 90°",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "AES-256 加密（空用户密码）",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "文件被截断",
+     "pass": true,
+     "note": ""
+    }
+   ]
+  },
+  "security": {
+   "static": [],
+   "runtime_events": [
+    {
+     "kind": "native",
+     "detail": "ctypes.dlopen None",
+     "count": 17
+    }
+   ],
+   "egress": false,
+   "adversarial": [
+    {
+     "name": "injection",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.727,
+     "error": ""
+    },
+    {
+     "name": "blank1000",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.722,
+     "error": ""
+    }
+   ],
+   "hosting_blocked": false
+  },
+  "performance": {
+   "wall_p50_s": 1.536,
+   "wall_p95_s": 1.8866,
+   "cpu_mean_s": 2.9282,
+   "rss_peak_mb": 601.5,
+   "large": {
+    "units": 16,
+    "ok": true,
+    "timed_out": false,
+    "wall_s": 1.939,
+    "cpu_s": 6.067,
+    "rss_mb": 601.5,
+    "cpu_s_per_unit": 0.37921
+   },
+   "errors": 0
+  },
+  "cost": {
+   "hardware_label": "通用 ARM CPU（每 vCPU）",
+   "usd_per_cpu_hour": 0.03625,
+   "price_source": "AWS c7g.large on-demand us-east-1, $0.0725/h for 2 vCPU (DoiT, 2026)",
+   "compute_usd_per_case": 2.948525256944444e-05,
+   "compute_usd_per_verified_result": 2.948525256944444e-05,
+   "list_price_usd": 0.002,
+   "effective_price_usd": 0.002
+  },
+  "known_failures": [],
+  "recheck": {
+   "count": 0,
+   "trend": [
+    0.9996
+   ],
+   "last": "2026-10-24T06:29:02+00:00"
+  },
+  "verify_seconds": 10.3
+ },
+ "cases": [
+  {
+   "id": "plain-8aa1033e",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.5509,
+   "cpu_s": 2.1132,
+   "rss_mb": 553.671875,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "plain-9d3f9a19",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.3687,
+   "cpu_s": 1.7598,
+   "rss_mb": 425.921875,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-5b8f84c6",
+   "scenario": "multicol",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.4238,
+   "cpu_s": 1.7907,
+   "rss_mb": 463.609375,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-32575172",
+   "scenario": "multicol",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.3555,
+   "cpu_s": 1.8814,
+   "rss_mb": 477.09375,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "table-6a74f899",
+   "scenario": "table",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.536,
+   "cpu_s": 2.3861,
+   "rss_mb": 473.546875,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "table-b73f9d67",
+   "scenario": "table",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.63,
+   "cpu_s": 2.4461,
+   "rss_mb": 481.703125,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-0cbe76e2",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.3804,
+   "cpu_s": 1.8017,
+   "rss_mb": 437.703125,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-6223b5e5",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.4773,
+   "cpu_s": 2.192,
+   "rss_mb": 440.71875,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-2b1252a2",
+   "scenario": "scanned",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.6147,
+   "cpu_s": 5.4294,
+   "rss_mb": 552.125,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-377d6b7c",
+   "scenario": "scanned",
+   "score": 0.9948,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.8866,
+   "cpu_s": 7.4813,
+   "rss_mb": 599.921875,
+   "events": 1,
+   "timed_out": false
+  }
+ ]
+}

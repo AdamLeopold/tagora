@@ -1,0 +1,12 @@
+name = "pdfplumber"
+version = "0.11"
+category = "pdf"
+entrypoint = "tool:run"
+license = "MIT"
+upstream = "https://github.com/jsvine/pdfplumber"
+author = "jsvine"
+price_usd = 0.0015
+[claim]
+text = "获取每个字符、矩形和线条的详细信息，并能轻松提取文本和表格。"
+[deps]
+packages = ["pdfplumber"]

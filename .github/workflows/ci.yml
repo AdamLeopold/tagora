@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main, phase0-mvp]
+  pull_request:
+
+jobs:
+  platform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: platform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Install
+        run: |
+          uv venv --python 3.11 .venv
+          uv pip install --python .venv/bin/python -e ".[bench,dev]"
+      - name: Test
+        run: .venv/bin/python -m pytest -q
+
+  frontends:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci && npx vite build
+        working-directory: web
+      - run: npm ci && npx tsc --noEmit && npx vite build
+        working-directory: app
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build API image
+        run: docker build -t tagora-api platform
+      - name: Smoke test
+        run: |
+          docker run -d --name api -p 8787:8787 tagora-api
+          for i in $(seq 1 30); do curl -sf localhost:8787/v1/health && break; sleep 2; done
+          curl -sf localhost:8787/v1/tools | head -c 300

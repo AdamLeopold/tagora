@@ -1,0 +1,501 @@
+{
+ "card": {
+  "schema": "tagora.card/v1",
+  "tool": "pymupdf4llm@2.0",
+  "name": "pymupdf4llm",
+  "version": "2.0",
+  "author": "Artifex",
+  "license": "AGPL-3.0",
+  "upstream": "https://github.com/pymupdf/pymupdf4llm",
+  "code_hash": "2d6a83df56dbaaf1dfa929e1f17946a40b0336b49374f6ab9882d2028a1a590d",
+  "hardware": "cpu-arm64",
+  "tier": "open",
+  "suite": {
+   "category": "pdf",
+   "version": "pdf-2026.10",
+   "split": "hidden",
+   "cases": 30,
+   "pass_threshold": 0.9
+  },
+  "verified_at": "2026-10-24T06:31:50+00:00",
+  "claim": {
+   "text": "把 PDF 转成适合 LLM 与 RAG 的 Markdown，识别标题、表格与多栏排版。",
+   "accuracy": null
+  },
+  "quality": {
+   "overall": 0.8561,
+   "mean_case_score": 0.8827,
+   "by_scenario": {
+    "plain": 1.0,
+    "multicol": 0.7171,
+    "table": 1.0,
+    "chinese": 1.0,
+    "scanned": 0.6962
+   },
+   "success_rate": 0.6333
+  },
+  "robustness": {
+   "score": 0.75,
+   "edges": [
+    {
+     "name": "空白页",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "页面旋转 90°",
+     "pass": false,
+     "note": ""
+    },
+    {
+     "name": "AES-256 加密（空用户密码）",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "文件被截断",
+     "pass": true,
+     "note": ""
+    }
+   ]
+  },
+  "security": {
+   "static": [
+    {
+     "severity": "warn",
+     "rule": "license",
+     "detail": "许可证 AGPL-3.0：托管时须向调用方提供源码（Tagora 工具默认开源，满足要求）",
+     "where": ""
+    }
+   ],
+   "runtime_events": [
+    {
+     "kind": "native",
+     "detail": "ctypes.dlopen None",
+     "count": 37
+    },
+    {
+     "kind": "process",
+     "detail": "subprocess.Popen '/bin/sh'",
+     "count": 37
+    }
+   ],
+   "egress": false,
+   "adversarial": [
+    {
+     "name": "injection",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.831,
+     "error": ""
+    },
+    {
+     "name": "blank1000",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 29.899,
+     "error": ""
+    }
+   ],
+   "hosting_blocked": false
+  },
+  "performance": {
+   "wall_p50_s": 1.6247,
+   "wall_p95_s": 9.6404,
+   "cpu_mean_s": 5.8188,
+   "rss_peak_mb": 1261.4,
+   "large": {
+    "units": 16,
+    "ok": true,
+    "timed_out": false,
+    "wall_s": 2.384,
+    "cpu_s": 6.503,
+    "rss_mb": 630.0,
+    "cpu_s_per_unit": 0.40642
+   },
+   "errors": 0
+  },
+  "cost": {
+   "hardware_label": "通用 ARM CPU（每 vCPU）",
+   "usd_per_cpu_hour": 0.03625,
+   "price_source": "AWS c7g.large on-demand us-east-1, $0.0725/h for 2 vCPU (DoiT, 2026)",
+   "compute_usd_per_case": 5.859227700231481e-05,
+   "compute_usd_per_verified_result": 9.251412158260233e-05,
+   "list_price_usd": 0.002,
+   "effective_price_usd": 0.0031578947368421056
+  },
+  "known_failures": [
+   "页面旋转 90°"
+  ],
+  "recheck": {
+   "count": 0,
+   "trend": [
+    0.8561
+   ],
+   "last": "2026-10-24T06:31:50+00:00"
+  },
+  "verify_seconds": 51.9
+ },
+ "cases": [
+  {
+   "id": "plain-3265c1d2",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.7882,
+   "cpu_s": 2.6927,
+   "rss_mb": 569.03125,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "plain-f8a2b97d",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.7667,
+   "cpu_s": 2.6416,
+   "rss_mb": 590.15625,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "plain-a16dab2f",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.7015,
+   "cpu_s": 2.4333,
+   "rss_mb": 593.59375,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "plain-f06bd92f",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.6247,
+   "cpu_s": 2.1739,
+   "rss_mb": 476.328125,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "plain-ca1a2ae3",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.3414,
+   "cpu_s": 1.9694,
+   "rss_mb": 475.359375,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "plain-efdb25c2",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.7314,
+   "cpu_s": 2.4433,
+   "rss_mb": 548.03125,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-e2828479",
+   "scenario": "multicol",
+   "score": 0.6572,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.7004,
+   "cpu_s": 2.3738,
+   "rss_mb": 480.28125,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-cc46ff53",
+   "scenario": "multicol",
+   "score": 0.5996,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.5639,
+   "cpu_s": 2.0038,
+   "rss_mb": 456.625,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-08ee4b64",
+   "scenario": "multicol",
+   "score": 0.812,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.3353,
+   "cpu_s": 1.7213,
+   "rss_mb": 448.640625,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-ed36a1ed",
+   "scenario": "multicol",
+   "score": 0.9768,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.4452,
+   "cpu_s": 1.8997,
+   "rss_mb": 481.015625,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-04642e5c",
+   "scenario": "multicol",
+   "score": 0.6236,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.5673,
+   "cpu_s": 2.2449,
+   "rss_mb": 462.3125,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-489a732e",
+   "scenario": "multicol",
+   "score": 0.6334,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.3991,
+   "cpu_s": 1.9059,
+   "rss_mb": 479.5625,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "table-a6e7bc91",
+   "scenario": "table",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.6479,
+   "cpu_s": 2.9052,
+   "rss_mb": 515.328125,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "table-7aeba429",
+   "scenario": "table",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.372,
+   "cpu_s": 2.0886,
+   "rss_mb": 500.859375,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "table-4a9dc6a8",
+   "scenario": "table",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.6261,
+   "cpu_s": 2.6916,
+   "rss_mb": 503.46875,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "table-d446ad4f",
+   "scenario": "table",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.6266,
+   "cpu_s": 2.5408,
+   "rss_mb": 505.953125,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "table-f5cc5079",
+   "scenario": "table",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.4404,
+   "cpu_s": 1.826,
+   "rss_mb": 501.15625,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "table-694bdd05",
+   "scenario": "table",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.2227,
+   "cpu_s": 2.1434,
+   "rss_mb": 500.203125,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-2774649b",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.2322,
+   "cpu_s": 1.7776,
+   "rss_mb": 470.34375,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-f38a0bea",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.1485,
+   "cpu_s": 1.7301,
+   "rss_mb": 481.796875,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-25da4778",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.1874,
+   "cpu_s": 1.8182,
+   "rss_mb": 492.25,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-b69bf9f1",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.2956,
+   "cpu_s": 1.626,
+   "rss_mb": 465.53125,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-03599252",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.1948,
+   "cpu_s": 1.701,
+   "rss_mb": 485.171875,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-a7d8812c",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.3349,
+   "cpu_s": 1.8143,
+   "rss_mb": 487.640625,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-9640d387",
+   "scenario": "scanned",
+   "score": 0.5612,
+   "ok": true,
+   "error": null,
+   "wall_s": 9.3658,
+   "cpu_s": 19.7468,
+   "rss_mb": 1199.234375,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-06a72de7",
+   "scenario": "scanned",
+   "score": 0.6738,
+   "ok": true,
+   "error": null,
+   "wall_s": 9.3989,
+   "cpu_s": 20.2638,
+   "rss_mb": 1261.4375,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-29c4aef1",
+   "scenario": "scanned",
+   "score": 0.7968,
+   "ok": true,
+   "error": null,
+   "wall_s": 9.5166,
+   "cpu_s": 21.1516,
+   "rss_mb": 1208.8125,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-3337a662",
+   "scenario": "scanned",
+   "score": 0.7161,
+   "ok": true,
+   "error": null,
+   "wall_s": 9.6404,
+   "cpu_s": 21.8739,
+   "rss_mb": 1225.75,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-65380681",
+   "scenario": "scanned",
+   "score": 0.7131,
+   "ok": true,
+   "error": null,
+   "wall_s": 6.5848,
+   "cpu_s": 16.9344,
+   "rss_mb": 1203.625,
+   "events": 2,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-8ef4e5e4",
+   "scenario": "scanned",
+   "score": 0.7161,
+   "ok": true,
+   "error": null,
+   "wall_s": 9.8309,
+   "cpu_s": 23.4277,
+   "rss_mb": 1226.0625,
+   "events": 2,
+   "timed_out": false
+  }
+ ]
+}

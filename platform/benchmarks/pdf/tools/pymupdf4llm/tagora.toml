@@ -1,0 +1,12 @@
+name = "pymupdf4llm"
+version = "2.0"
+category = "pdf"
+entrypoint = "tool:run"
+license = "AGPL-3.0"
+upstream = "https://github.com/pymupdf/pymupdf4llm"
+author = "Artifex"
+price_usd = 0.002
+[claim]
+text = "把 PDF 转成适合 LLM 与 RAG 的 Markdown，识别标题、表格与多栏排版。"
+[deps]
+packages = ["pymupdf4llm", "pymupdf"]

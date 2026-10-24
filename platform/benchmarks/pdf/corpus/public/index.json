@@ -1,0 +1,42 @@
+[
+ {
+  "id": "plain-8aa1033e",
+  "scenario": "plain"
+ },
+ {
+  "id": "plain-9d3f9a19",
+  "scenario": "plain"
+ },
+ {
+  "id": "multicol-5b8f84c6",
+  "scenario": "multicol"
+ },
+ {
+  "id": "multicol-32575172",
+  "scenario": "multicol"
+ },
+ {
+  "id": "table-6a74f899",
+  "scenario": "table"
+ },
+ {
+  "id": "table-b73f9d67",
+  "scenario": "table"
+ },
+ {
+  "id": "chinese-0cbe76e2",
+  "scenario": "chinese"
+ },
+ {
+  "id": "chinese-6223b5e5",
+  "scenario": "chinese"
+ },
+ {
+  "id": "scanned-2b1252a2",
+  "scenario": "scanned"
+ },
+ {
+  "id": "scanned-377d6b7c",
+  "scenario": "scanned"
+ }
+]

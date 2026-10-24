@@ -1,0 +1,13 @@
+name = "tagora-hybrid"
+version = "0.2"
+category = "pdf"
+entrypoint = "tool:run"
+license = "MIT"
+upstream = "https://github.com/AdamLeopold/tagora"
+author = "Tagora 参考实现"
+price_usd = 0.002
+[claim]
+text = "组合实现：按版面分栏排序文本块，表格转 Markdown；无文本层的页面先纠偏、按行切分再 OCR。"
+accuracy = 0.95
+[deps]
+packages = ["pymupdf", "rapidocr-onnxruntime", "wordninja", "pillow"]

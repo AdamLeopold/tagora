@@ -1,0 +1,484 @@
+{
+ "card": {
+  "schema": "tagora.card/v1",
+  "tool": "pypdf-layout@6.1",
+  "name": "pypdf-layout",
+  "version": "6.1",
+  "author": "py-pdf",
+  "license": "BSD-3-Clause",
+  "upstream": "https://github.com/py-pdf/pypdf",
+  "code_hash": "b33ed093e9ad39b9ee5ef318a4b5e0dc2d87a31b3aef7420140a6c3d29b1e7a5",
+  "hardware": "cpu-arm64",
+  "tier": "open",
+  "suite": {
+   "category": "pdf",
+   "version": "pdf-2026.10",
+   "split": "hidden",
+   "cases": 30,
+   "pass_threshold": 0.9
+  },
+  "verified_at": "2026-10-24T06:31:55+00:00",
+  "claim": {
+   "text": "pypdf 的版面模式：尽量保留原始页面的空间布局。",
+   "accuracy": null
+  },
+  "quality": {
+   "overall": 0.7036,
+   "mean_case_score": 0.6295,
+   "by_scenario": {
+    "plain": 1.0,
+    "multicol": 0.6275,
+    "table": 0.52,
+    "chinese": 1.0,
+    "scanned": 0.0
+   },
+   "success_rate": 0.4333
+  },
+  "robustness": {
+   "score": 1.0,
+   "edges": [
+    {
+     "name": "空白页",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "页面旋转 90°",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "AES-256 加密（空用户密码）",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "文件被截断",
+     "pass": true,
+     "note": ""
+    }
+   ]
+  },
+  "security": {
+   "static": [],
+   "runtime_events": [],
+   "egress": false,
+   "adversarial": [
+    {
+     "name": "injection",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.157,
+     "error": ""
+    },
+    {
+     "name": "blank1000",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.181,
+     "error": ""
+    }
+   ],
+   "hosting_blocked": false
+  },
+  "performance": {
+   "wall_p50_s": 0.1799,
+   "wall_p95_s": 0.1832,
+   "cpu_mean_s": 0.1794,
+   "rss_peak_mb": 92.8,
+   "large": {
+    "units": 16,
+    "ok": true,
+    "timed_out": false,
+    "wall_s": 0.191,
+    "cpu_s": 0.191,
+    "rss_mb": 62.1,
+    "cpu_s_per_unit": 0.01197
+   },
+   "errors": 0
+  },
+  "cost": {
+   "hardware_label": "通用 ARM CPU（每 vCPU）",
+   "usd_per_cpu_hour": 0.03625,
+   "price_source": "AWS c7g.large on-demand us-east-1, $0.0725/h for 2 vCPU (DoiT, 2026)",
+   "compute_usd_per_case": 1.8063270949074075e-06,
+   "compute_usd_per_verified_result": 4.168447142094017e-06,
+   "list_price_usd": 0.0006,
+   "effective_price_usd": 0.0013846153846153845
+  },
+  "known_failures": [
+   "表格结构",
+   "扫描件（纯图像）"
+  ],
+  "recheck": {
+   "count": 0,
+   "trend": [
+    0.7036
+   ],
+   "last": "2026-10-24T06:31:55+00:00"
+  },
+  "verify_seconds": 2.3
+ },
+ "cases": [
+  {
+   "id": "plain-3265c1d2",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1799,
+   "cpu_s": 0.1794,
+   "rss_mb": 82.484375,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "plain-f8a2b97d",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1824,
+   "cpu_s": 0.1813,
+   "rss_mb": 83.796875,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "plain-a16dab2f",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1827,
+   "cpu_s": 0.1825,
+   "rss_mb": 89.90625,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "plain-f06bd92f",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1816,
+   "cpu_s": 0.1805,
+   "rss_mb": 85.765625,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "plain-ca1a2ae3",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1794,
+   "cpu_s": 0.1792,
+   "rss_mb": 82.796875,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "plain-efdb25c2",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1817,
+   "cpu_s": 0.1816,
+   "rss_mb": 81.203125,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-e2828479",
+   "scenario": "multicol",
+   "score": 0.4336,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1798,
+   "cpu_s": 0.1796,
+   "rss_mb": 80.296875,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-cc46ff53",
+   "scenario": "multicol",
+   "score": 0.4378,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1813,
+   "cpu_s": 0.1812,
+   "rss_mb": 86.0,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-08ee4b64",
+   "scenario": "multicol",
+   "score": 0.762,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1811,
+   "cpu_s": 0.181,
+   "rss_mb": 89.4375,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-ed36a1ed",
+   "scenario": "multicol",
+   "score": 0.9768,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1824,
+   "cpu_s": 0.1822,
+   "rss_mb": 91.140625,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-04642e5c",
+   "scenario": "multicol",
+   "score": 0.5667,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1832,
+   "cpu_s": 0.1831,
+   "rss_mb": 82.78125,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-489a732e",
+   "scenario": "multicol",
+   "score": 0.588,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1802,
+   "cpu_s": 0.1801,
+   "rss_mb": 76.578125,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "table-a6e7bc91",
+   "scenario": "table",
+   "score": 0.52,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1797,
+   "cpu_s": 0.1795,
+   "rss_mb": 85.234375,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "table-7aeba429",
+   "scenario": "table",
+   "score": 0.52,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1796,
+   "cpu_s": 0.1794,
+   "rss_mb": 89.25,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "table-4a9dc6a8",
+   "scenario": "table",
+   "score": 0.52,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1772,
+   "cpu_s": 0.1771,
+   "rss_mb": 79.390625,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "table-d446ad4f",
+   "scenario": "table",
+   "score": 0.52,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1798,
+   "cpu_s": 0.1795,
+   "rss_mb": 92.78125,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "table-f5cc5079",
+   "scenario": "table",
+   "score": 0.52,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1792,
+   "cpu_s": 0.1784,
+   "rss_mb": 86.5,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "table-694bdd05",
+   "scenario": "table",
+   "score": 0.52,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1788,
+   "cpu_s": 0.1786,
+   "rss_mb": 81.109375,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-2774649b",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1812,
+   "cpu_s": 0.1809,
+   "rss_mb": 84.234375,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-f38a0bea",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1796,
+   "cpu_s": 0.1795,
+   "rss_mb": 90.40625,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-25da4778",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1827,
+   "cpu_s": 0.1825,
+   "rss_mb": 79.65625,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-b69bf9f1",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1813,
+   "cpu_s": 0.1811,
+   "rss_mb": 80.40625,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-03599252",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1863,
+   "cpu_s": 0.1846,
+   "rss_mb": 86.75,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-a7d8812c",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1828,
+   "cpu_s": 0.1826,
+   "rss_mb": 85.5625,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-9640d387",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1751,
+   "cpu_s": 0.1749,
+   "rss_mb": 91.09375,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-06a72de7",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1758,
+   "cpu_s": 0.1756,
+   "rss_mb": 89.609375,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-29c4aef1",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1746,
+   "cpu_s": 0.1744,
+   "rss_mb": 81.671875,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-3337a662",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1742,
+   "cpu_s": 0.174,
+   "rss_mb": 79.203125,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-65380681",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1723,
+   "cpu_s": 0.1721,
+   "rss_mb": 79.828125,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-8ef4e5e4",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1756,
+   "cpu_s": 0.1754,
+   "rss_mb": 86.78125,
+   "events": 0,
+   "timed_out": false
+  }
+ ]
+}

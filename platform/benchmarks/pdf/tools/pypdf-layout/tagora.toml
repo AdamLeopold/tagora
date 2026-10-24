@@ -1,0 +1,12 @@
+name = "pypdf-layout"
+version = "6.1"
+category = "pdf"
+entrypoint = "tool:run"
+license = "BSD-3-Clause"
+upstream = "https://github.com/py-pdf/pypdf"
+author = "py-pdf"
+price_usd = 0.0006
+[claim]
+text = "pypdf 的版面模式：尽量保留原始页面的空间布局。"
+[deps]
+packages = ["pypdf"]

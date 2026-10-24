@@ -1,0 +1,496 @@
+{
+ "card": {
+  "schema": "tagora.card/v1",
+  "tool": "pymupdf@2.0",
+  "name": "pymupdf",
+  "version": "2.0",
+  "author": "Artifex",
+  "license": "AGPL-3.0",
+  "upstream": "https://github.com/pymupdf/PyMuPDF",
+  "code_hash": "2695b5fc9a2890400ce15da85fa513a4885cbe43de48bec7002d7657af8296ef",
+  "hardware": "cpu-arm64",
+  "tier": "open",
+  "suite": {
+   "category": "pdf",
+   "version": "pdf-2026.10",
+   "split": "hidden",
+   "cases": 30,
+   "pass_threshold": 0.9
+  },
+  "verified_at": "2026-10-24T06:30:58+00:00",
+  "claim": {
+   "text": "高性能的 PDF 数据提取、分析、转换与处理库。",
+   "accuracy": null
+  },
+  "quality": {
+   "overall": 0.8064,
+   "mean_case_score": 0.758,
+   "by_scenario": {
+    "plain": 1.0,
+    "multicol": 0.7964,
+    "table": 0.9937,
+    "chinese": 1.0,
+    "scanned": 0.0
+   },
+   "success_rate": 0.7333
+  },
+  "robustness": {
+   "score": 1.0,
+   "edges": [
+    {
+     "name": "空白页",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "页面旋转 90°",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "AES-256 加密（空用户密码）",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "文件被截断",
+     "pass": true,
+     "note": ""
+    }
+   ]
+  },
+  "security": {
+   "static": [
+    {
+     "severity": "warn",
+     "rule": "license",
+     "detail": "许可证 AGPL-3.0：托管时须向调用方提供源码（Tagora 工具默认开源，满足要求）",
+     "where": ""
+    }
+   ],
+   "runtime_events": [
+    {
+     "kind": "native",
+     "detail": "ctypes.dlopen None",
+     "count": 37
+    }
+   ],
+   "egress": false,
+   "adversarial": [
+    {
+     "name": "injection",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.713,
+     "error": ""
+    },
+    {
+     "name": "blank1000",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 29.771,
+     "error": ""
+    }
+   ],
+   "hosting_blocked": false
+  },
+  "performance": {
+   "wall_p50_s": 1.2609,
+   "wall_p95_s": 1.6207,
+   "cpu_mean_s": 1.8747,
+   "rss_peak_mb": 634.3,
+   "large": {
+    "units": 16,
+    "ok": true,
+    "timed_out": false,
+    "wall_s": 1.874,
+    "cpu_s": 5.95,
+    "rss_mb": 582.9,
+    "cpu_s_per_unit": 0.37185
+   },
+   "errors": 0
+  },
+  "cost": {
+   "hardware_label": "通用 ARM CPU（每 vCPU）",
+   "usd_per_cpu_hour": 0.03625,
+   "price_source": "AWS c7g.large on-demand us-east-1, $0.0725/h for 2 vCPU (DoiT, 2026)",
+   "compute_usd_per_case": 1.8877384861111112e-05,
+   "compute_usd_per_verified_result": 2.57418884469697e-05,
+   "list_price_usd": 0.0008,
+   "effective_price_usd": 0.001090909090909091
+  },
+  "known_failures": [
+   "扫描件（纯图像）"
+  ],
+  "recheck": {
+   "count": 0,
+   "trend": [
+    0.8064
+   ],
+   "last": "2026-10-24T06:30:58+00:00"
+  },
+  "verify_seconds": 41.1
+ },
+ "cases": [
+  {
+   "id": "plain-3265c1d2",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.6207,
+   "cpu_s": 2.4583,
+   "rss_mb": 559.171875,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "plain-f8a2b97d",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.5228,
+   "cpu_s": 2.4363,
+   "rss_mb": 574.109375,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "plain-a16dab2f",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.4904,
+   "cpu_s": 2.2602,
+   "rss_mb": 573.6875,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "plain-f06bd92f",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.2609,
+   "cpu_s": 1.7602,
+   "rss_mb": 423.765625,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "plain-ca1a2ae3",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.4137,
+   "cpu_s": 1.8664,
+   "rss_mb": 457.1875,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "plain-efdb25c2",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.6526,
+   "cpu_s": 2.5901,
+   "rss_mb": 581.109375,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-e2828479",
+   "scenario": "multicol",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.5693,
+   "cpu_s": 2.2468,
+   "rss_mb": 425.984375,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-cc46ff53",
+   "scenario": "multicol",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.2855,
+   "cpu_s": 1.7946,
+   "rss_mb": 397.40625,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-08ee4b64",
+   "scenario": "multicol",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.1947,
+   "cpu_s": 1.7971,
+   "rss_mb": 430.578125,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-ed36a1ed",
+   "scenario": "multicol",
+   "score": 0.3899,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.0955,
+   "cpu_s": 1.5093,
+   "rss_mb": 429.875,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-04642e5c",
+   "scenario": "multicol",
+   "score": 0.3883,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.2536,
+   "cpu_s": 1.9784,
+   "rss_mb": 460.25,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-489a732e",
+   "scenario": "multicol",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.3515,
+   "cpu_s": 1.6106,
+   "rss_mb": 442.734375,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "table-a6e7bc91",
+   "scenario": "table",
+   "score": 0.9874,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.4462,
+   "cpu_s": 2.3414,
+   "rss_mb": 464.84375,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "table-7aeba429",
+   "scenario": "table",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.3846,
+   "cpu_s": 2.0585,
+   "rss_mb": 492.171875,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "table-4a9dc6a8",
+   "scenario": "table",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.3307,
+   "cpu_s": 2.0586,
+   "rss_mb": 455.390625,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "table-d446ad4f",
+   "scenario": "table",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.2917,
+   "cpu_s": 2.0442,
+   "rss_mb": 481.640625,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "table-f5cc5079",
+   "scenario": "table",
+   "score": 0.9747,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.3066,
+   "cpu_s": 2.1096,
+   "rss_mb": 488.828125,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "table-694bdd05",
+   "scenario": "table",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.2636,
+   "cpu_s": 2.181,
+   "rss_mb": 482.46875,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-2774649b",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.1911,
+   "cpu_s": 1.6484,
+   "rss_mb": 445.265625,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-f38a0bea",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.0838,
+   "cpu_s": 1.3452,
+   "rss_mb": 422.703125,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-25da4778",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.0859,
+   "cpu_s": 1.5956,
+   "rss_mb": 429.953125,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-b69bf9f1",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.1618,
+   "cpu_s": 1.534,
+   "rss_mb": 449.75,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-03599252",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.1013,
+   "cpu_s": 1.8339,
+   "rss_mb": 426.71875,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-a7d8812c",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.1622,
+   "cpu_s": 1.4315,
+   "rss_mb": 438.359375,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-9640d387",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.944,
+   "cpu_s": 1.3202,
+   "rss_mb": 432.203125,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-06a72de7",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.0774,
+   "cpu_s": 1.7261,
+   "rss_mb": 441.859375,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-29c4aef1",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.108,
+   "cpu_s": 1.7748,
+   "rss_mb": 418.140625,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-3337a662",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.0921,
+   "cpu_s": 1.7129,
+   "rss_mb": 455.328125,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-65380681",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.0363,
+   "cpu_s": 1.5724,
+   "rss_mb": 454.5625,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-8ef4e5e4",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 1.0645,
+   "cpu_s": 1.645,
+   "rss_mb": 455.515625,
+   "events": 1,
+   "timed_out": false
+  }
+ ]
+}

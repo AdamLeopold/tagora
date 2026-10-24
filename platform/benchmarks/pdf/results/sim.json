@@ -1,0 +1,236 @@
+{
+ "tools": [
+  "markitdown",
+  "pdfminer.six",
+  "pdfplumber",
+  "pymupdf",
+  "pymupdf4llm",
+  "pypdf-layout",
+  "pypdf",
+  "rapidocr",
+  "tagora-hybrid"
+ ],
+ "threshold": 0.9,
+ "calibration": {
+  "best": {
+   "a": 0.1,
+   "b": 0.0,
+   "log_loss": 0.14528462230504197,
+   "brier": 0.040992693374134644
+  },
+  "laplace": {
+   "a": 1.0,
+   "b": 1.0,
+   "log_loss": 0.3431956204763132,
+   "brier": 0.08796296296296297
+  },
+  "mle_no_prior": {
+   "a": 0.0,
+   "b": 0.0,
+   "log_loss": 0.40439062279982013,
+   "brier": 0.04259254074167407
+  },
+  "top5": [
+   {
+    "a": 0.1,
+    "b": 0.0,
+    "log_loss": 0.14528462230504197,
+    "brier": 0.040992693374134644
+   },
+   {
+    "a": 0.25,
+    "b": 0.0,
+    "log_loss": 0.15205739055312112,
+    "brier": 0.04211248285371248
+   },
+   {
+    "a": 0.1,
+    "b": 0.1,
+    "log_loss": 0.1685605564967999,
+    "brier": 0.04216406489133762
+   },
+   {
+    "a": 0.25,
+    "b": 0.1,
+    "log_loss": 0.17229842104972506,
+    "brier": 0.04282313096256057
+   },
+   {
+    "a": 0.5,
+    "b": 0.0,
+    "log_loss": 0.18118518806764278,
+    "brier": 0.04992592592641482
+   }
+  ]
+ },
+ "routing": {
+  "prior": {
+   "a": 0.1,
+   "b": 0.0
+  },
+  "results": {
+   "effective": {
+    "requests": 30,
+    "success_rate": 1.0,
+    "spend_usd": 0.0314,
+    "usd_per_verified_result": 0.001047,
+    "attempts_per_request": 1.133
+   },
+   "cheapest": {
+    "requests": 30,
+    "success_rate": 0.5666666666666667,
+    "spend_usd": 0.0338,
+    "usd_per_verified_result": 0.001988,
+    "attempts_per_request": 1.9
+   },
+   "best_overall": {
+    "requests": 30,
+    "success_rate": 1.0,
+    "spend_usd": 0.06,
+    "usd_per_verified_result": 0.002,
+    "attempts_per_request": 1.0
+   },
+   "random": {
+    "requests": 30,
+    "success_rate": 0.7,
+    "spend_usd": 0.0796,
+    "usd_per_verified_result": 0.00379,
+    "attempts_per_request": 1.867
+   }
+  }
+ },
+ "routing_laplace": {
+  "effective": {
+   "requests": 30,
+   "success_rate": 0.9666666666666667,
+   "spend_usd": 0.0352,
+   "usd_per_verified_result": 0.001214,
+   "attempts_per_request": 1.533
+  },
+  "cheapest": {
+   "requests": 30,
+   "success_rate": 0.5666666666666667,
+   "spend_usd": 0.0338,
+   "usd_per_verified_result": 0.001988,
+   "attempts_per_request": 1.9
+  },
+  "best_overall": {
+   "requests": 30,
+   "success_rate": 1.0,
+   "spend_usd": 0.06,
+   "usd_per_verified_result": 0.002,
+   "attempts_per_request": 1.0
+  },
+  "random": {
+   "requests": 30,
+   "success_rate": 0.7,
+   "spend_usd": 0.0796,
+   "usd_per_verified_result": 0.00379,
+   "attempts_per_request": 1.867
+  }
+ },
+ "underwriting": {
+  "margins": [
+   {
+    "margin": 0.0,
+    "profit_usd": -0.000593,
+    "revenue_usd": 0.030807,
+    "p_loss": 0.538
+   },
+   {
+    "margin": 0.05,
+    "profit_usd": 0.000947,
+    "revenue_usd": 0.032347,
+    "p_loss": 0.371
+   },
+   {
+    "margin": 0.1,
+    "profit_usd": 0.002487,
+    "revenue_usd": 0.033887,
+    "p_loss": 0.223
+   },
+   {
+    "margin": 0.15,
+    "profit_usd": 0.004028,
+    "revenue_usd": 0.035428,
+    "p_loss": 0.1195
+   },
+   {
+    "margin": 0.2,
+    "profit_usd": 0.005568,
+    "revenue_usd": 0.036968,
+    "p_loss": 0.065
+   },
+   {
+    "margin": 0.3,
+    "profit_usd": 0.008649,
+    "revenue_usd": 0.040049,
+    "p_loss": 0.011
+   },
+   {
+    "margin": 0.5,
+    "profit_usd": 0.01481,
+    "revenue_usd": 0.04621,
+    "p_loss": 0.0
+   }
+  ],
+  "recommended_margin": 0.3,
+  "requests": 30
+ },
+ "compute_vs_price": [
+  {
+   "tool": "markitdown",
+   "list_price_usd": 0.001,
+   "compute_usd_per_case": 5.681933414351852e-06,
+   "price_to_compute": 176.0
+  },
+  {
+   "tool": "pdfminer.six",
+   "list_price_usd": 0.0008,
+   "compute_usd_per_case": 1.1763571412037035e-06,
+   "price_to_compute": 680.1
+  },
+  {
+   "tool": "pdfplumber",
+   "list_price_usd": 0.0015,
+   "compute_usd_per_case": 1.4871055671296296e-06,
+   "price_to_compute": 1008.7
+  },
+  {
+   "tool": "pymupdf",
+   "list_price_usd": 0.0008,
+   "compute_usd_per_case": 1.8877384861111112e-05,
+   "price_to_compute": 42.4
+  },
+  {
+   "tool": "pymupdf4llm",
+   "list_price_usd": 0.002,
+   "compute_usd_per_case": 5.859227700231481e-05,
+   "price_to_compute": 34.1
+  },
+  {
+   "tool": "pypdf-layout",
+   "list_price_usd": 0.0006,
+   "compute_usd_per_case": 1.8063270949074075e-06,
+   "price_to_compute": 332.2
+  },
+  {
+   "tool": "pypdf",
+   "list_price_usd": 0.0005,
+   "compute_usd_per_case": 1.8141252083333334e-06,
+   "price_to_compute": 275.6
+  },
+  {
+   "tool": "rapidocr",
+   "list_price_usd": 0.004,
+   "compute_usd_per_case": 0.0002983406597916667,
+   "price_to_compute": 13.4
+  },
+  {
+   "tool": "tagora-hybrid",
+   "list_price_usd": 0.002,
+   "compute_usd_per_case": 5.015791599537036e-05,
+   "price_to_compute": 39.9
+  }
+ ]
+}

@@ -1,0 +1,253 @@
+{
+ "card": {
+  "schema": "tagora.card/v1",
+  "tool": "rapidocr@1.4",
+  "name": "rapidocr",
+  "version": "1.4",
+  "author": "RapidAI",
+  "license": "Apache-2.0",
+  "upstream": "https://github.com/RapidAI/RapidOCR",
+  "code_hash": "0b1592779d2f84bfb81925d7a5043373708bef48fa446f9e42ad971d0ec6ee50",
+  "hardware": "cpu-arm64",
+  "tier": "open",
+  "suite": {
+   "category": "pdf",
+   "version": "pdf-2026.10",
+   "split": "public",
+   "cases": 10,
+   "pass_threshold": 0.9
+  },
+  "verified_at": "2026-10-24T06:24:07+00:00",
+  "claim": {
+   "text": "基于 ONNXRuntime 的跨平台 OCR，开箱即用，支持中英文。",
+   "accuracy": null
+  },
+  "quality": {
+   "overall": 0.5798,
+   "mean_case_score": 0.5998,
+   "by_scenario": {
+    "plain": 0.5896,
+    "multicol": 0.3152,
+    "table": 0.42,
+    "chinese": 0.9984,
+    "scanned": 0.6758
+   },
+   "success_rate": 0.2
+  },
+  "robustness": {
+   "score": 0.5,
+   "edges": [
+    {
+     "name": "空白页",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "页面旋转 90°",
+     "pass": false,
+     "note": ""
+    },
+    {
+     "name": "AES-256 加密（空用户密码）",
+     "pass": false,
+     "note": ""
+    },
+    {
+     "name": "文件被截断",
+     "pass": true,
+     "note": ""
+    }
+   ]
+  },
+  "security": {
+   "static": [],
+   "runtime_events": [
+    {
+     "kind": "native",
+     "detail": "ctypes.dlopen None",
+     "count": 17
+    }
+   ],
+   "egress": false,
+   "adversarial": [
+    {
+     "name": "injection",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 1.831,
+     "error": ""
+    },
+    {
+     "name": "blank1000",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 41.291,
+     "error": ""
+    }
+   ],
+   "hosting_blocked": false
+  },
+  "performance": {
+   "wall_p50_s": 18.4521,
+   "wall_p95_s": 26.6812,
+   "cpu_mean_s": 32.4691,
+   "rss_peak_mb": 1510.7,
+   "large": {
+    "units": 16,
+    "ok": true,
+    "timed_out": false,
+    "wall_s": 41.928,
+    "cpu_s": 279.023,
+    "rss_mb": 1510.7,
+    "cpu_s_per_unit": 17.43897
+   },
+   "errors": 0
+  },
+  "cost": {
+   "hardware_label": "通用 ARM CPU（每 vCPU）",
+   "usd_per_cpu_hour": 0.03625,
+   "price_source": "AWS c7g.large on-demand us-east-1, $0.0725/h for 2 vCPU (DoiT, 2026)",
+   "compute_usd_per_case": 0.0003269462175,
+   "compute_usd_per_verified_result": 0.0016347310874999998,
+   "list_price_usd": 0.004,
+   "effective_price_usd": 0.02
+  },
+  "known_failures": [
+   "单栏英文正文",
+   "双栏排版（阅读顺序）",
+   "表格结构",
+   "页面旋转 90°",
+   "AES-256 加密（空用户密码）"
+  ],
+  "recheck": {
+   "count": 0,
+   "trend": [
+    0.5798
+   ],
+   "last": "2026-10-24T06:24:07+00:00"
+  },
+  "verify_seconds": 119.5
+ },
+ "cases": [
+  {
+   "id": "plain-8aa1033e",
+   "scenario": "plain",
+   "score": 0.5088,
+   "ok": true,
+   "error": null,
+   "wall_s": 26.6812,
+   "cpu_s": 54.2511,
+   "rss_mb": 1135.234375,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "plain-9d3f9a19",
+   "scenario": "plain",
+   "score": 0.6703,
+   "ok": true,
+   "error": null,
+   "wall_s": 25.1743,
+   "cpu_s": 45.0773,
+   "rss_mb": 631.234375,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-5b8f84c6",
+   "scenario": "multicol",
+   "score": 0.2163,
+   "ok": true,
+   "error": null,
+   "wall_s": 24.9304,
+   "cpu_s": 44.4899,
+   "rss_mb": 497.28125,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-32575172",
+   "scenario": "multicol",
+   "score": 0.414,
+   "ok": true,
+   "error": null,
+   "wall_s": 24.6801,
+   "cpu_s": 43.5359,
+   "rss_mb": 481.90625,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "table-6a74f899",
+   "scenario": "table",
+   "score": 0.3867,
+   "ok": true,
+   "error": null,
+   "wall_s": 13.3377,
+   "cpu_s": 19.8945,
+   "rss_mb": 515.953125,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "table-b73f9d67",
+   "scenario": "table",
+   "score": 0.4533,
+   "ok": true,
+   "error": null,
+   "wall_s": 16.1365,
+   "cpu_s": 24.4069,
+   "rss_mb": 467.953125,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-0cbe76e2",
+   "scenario": "chinese",
+   "score": 0.9982,
+   "ok": true,
+   "error": null,
+   "wall_s": 15.7924,
+   "cpu_s": 24.1066,
+   "rss_mb": 504.375,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-6223b5e5",
+   "scenario": "chinese",
+   "score": 0.9987,
+   "ok": true,
+   "error": null,
+   "wall_s": 18.4521,
+   "cpu_s": 29.633,
+   "rss_mb": 586.1875,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-2b1252a2",
+   "scenario": "scanned",
+   "score": 0.8354,
+   "ok": true,
+   "error": null,
+   "wall_s": 10.2513,
+   "cpu_s": 17.0725,
+   "rss_mb": 829.46875,
+   "events": 1,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-377d6b7c",
+   "scenario": "scanned",
+   "score": 0.5163,
+   "ok": true,
+   "error": null,
+   "wall_s": 10.2264,
+   "cpu_s": 22.2238,
+   "rss_mb": 702.34375,
+   "events": 1,
+   "timed_out": false
+  }
+ ]
+}

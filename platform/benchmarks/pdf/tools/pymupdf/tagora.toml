@@ -1,0 +1,12 @@
+name = "pymupdf"
+version = "2.0"
+category = "pdf"
+entrypoint = "tool:run"
+license = "AGPL-3.0"
+upstream = "https://github.com/pymupdf/PyMuPDF"
+author = "Artifex"
+price_usd = 0.0008
+[claim]
+text = "高性能的 PDF 数据提取、分析、转换与处理库。"
+[deps]
+packages = ["pymupdf"]

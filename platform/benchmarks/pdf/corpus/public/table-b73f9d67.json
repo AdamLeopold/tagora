@@ -1,0 +1,116 @@
+{
+ "id": "table-b73f9d67",
+ "scenario": "table",
+ "pages": 1,
+ "paragraphs": [
+  "Placebo Biomarker Section Dose",
+  "Ligand under week 833.6 control from tumor inclusion the table committee within group interval after month. Reagent from laboratory visit within fitted laboratory with group cell at antibody curve were median set.",
+  "Inclusion was replicate criteria after assay significant from sequence. Protocol was tissue cell within visit measured was section event at reagent hour were secondary."
+ ],
+ "tables": [
+  [
+   [
+    "Assay",
+    "Minute",
+    "Adverse"
+   ],
+   [
+    "Serum-57",
+    "assay",
+    "475.7"
+   ],
+   [
+    "Endpoint-23",
+    "treatment",
+    "439.35"
+   ],
+   [
+    "Endpoint-64",
+    "295",
+    "290.57"
+   ],
+   [
+    "Assay-73",
+    "414.25",
+    "receptor"
+   ],
+   [
+    "Analysis-5",
+    "56%",
+    "21%"
+   ],
+   [
+    "Receptor-17",
+    "183.67",
+    "32%"
+   ],
+   [
+    "Sample-21",
+    "laboratory",
+    "121.3"
+   ],
+   [
+    "Data-53",
+    "gene",
+    "448.91"
+   ],
+   [
+    "Replicate-77",
+    "58%",
+    "confidence"
+   ]
+  ],
+  [
+   [
+    "Reagent",
+    "Result",
+    "Adverse"
+   ],
+   [
+    "Ratio-59",
+    "460.7",
+    "425.1"
+   ],
+   [
+    "Method-66",
+    "124.2",
+    "month"
+   ],
+   [
+    "Clinical-92",
+    "method",
+    "417.0"
+   ],
+   [
+    "Data-74",
+    "125",
+    "91%"
+   ],
+   [
+    "Replicate-17",
+    "100.8",
+    "165.2"
+   ],
+   [
+    "Variant-89",
+    "338.1",
+    "40"
+   ],
+   [
+    "Arm-22",
+    "60%",
+    "323.0"
+   ],
+   [
+    "Set-21",
+    "data",
+    "57.3"
+   ],
+   [
+    "Reagent-89",
+    "3",
+    "tumor"
+   ]
+  ]
+ ]
+}

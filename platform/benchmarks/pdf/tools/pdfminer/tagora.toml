@@ -1,0 +1,12 @@
+name = "pdfminer.six"
+version = "20260107"
+category = "pdf"
+entrypoint = "tool:run"
+license = "MIT"
+upstream = "https://github.com/pdfminer/pdfminer.six"
+author = "pdfminer"
+price_usd = 0.0008
+[claim]
+text = "社区维护的 PDF 解析器，专注于获取和分析文本数据。"
+[deps]
+packages = ["pdfminer.six"]

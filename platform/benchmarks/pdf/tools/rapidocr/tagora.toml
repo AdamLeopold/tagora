@@ -1,0 +1,12 @@
+name = "rapidocr"
+version = "1.4"
+category = "pdf"
+entrypoint = "tool:run"
+license = "Apache-2.0"
+upstream = "https://github.com/RapidAI/RapidOCR"
+author = "RapidAI"
+price_usd = 0.004
+[claim]
+text = "基于 ONNXRuntime 的跨平台 OCR，开箱即用，支持中英文。"
+[deps]
+packages = ["rapidocr-onnxruntime", "pymupdf"]

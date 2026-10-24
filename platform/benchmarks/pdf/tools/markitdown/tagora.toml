@@ -1,0 +1,12 @@
+name = "markitdown"
+version = "0.1"
+category = "pdf"
+entrypoint = "tool:run"
+license = "MIT"
+upstream = "https://github.com/microsoft/markitdown"
+author = "Microsoft"
+price_usd = 0.001
+[claim]
+text = "把 PDF、Office 文档等各种文件转换成 Markdown，供 LLM 和文本分析流程使用。"
+[deps]
+packages = ["markitdown"]

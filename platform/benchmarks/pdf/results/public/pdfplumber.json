@@ -1,0 +1,250 @@
+{
+ "card": {
+  "schema": "tagora.card/v1",
+  "tool": "pdfplumber@0.11",
+  "name": "pdfplumber",
+  "version": "0.11",
+  "author": "jsvine",
+  "license": "MIT",
+  "upstream": "https://github.com/jsvine/pdfplumber",
+  "code_hash": "2affad701a439817f383e2070d0d8e62db8a66b1093854f1085a82112b6cf943",
+  "hardware": "cpu-arm64",
+  "tier": "open",
+  "suite": {
+   "category": "pdf",
+   "version": "pdf-2026.10",
+   "split": "public",
+   "cases": 10,
+   "pass_threshold": 0.9
+  },
+  "verified_at": "2026-10-24T06:20:38+00:00",
+  "claim": {
+   "text": "获取每个字符、矩形和线条的详细信息，并能轻松提取文本和表格。",
+   "accuracy": null
+  },
+  "quality": {
+   "overall": 0.7091,
+   "mean_case_score": 0.6989,
+   "by_scenario": {
+    "plain": 1.0,
+    "multicol": 0.6106,
+    "table": 0.884,
+    "chinese": 1.0,
+    "scanned": 0.0
+   },
+   "success_rate": 0.5
+  },
+  "robustness": {
+   "score": 0.75,
+   "edges": [
+    {
+     "name": "空白页",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "页面旋转 90°",
+     "pass": false,
+     "note": ""
+    },
+    {
+     "name": "AES-256 加密（空用户密码）",
+     "pass": true,
+     "note": ""
+    },
+    {
+     "name": "文件被截断",
+     "pass": true,
+     "note": ""
+    }
+   ]
+  },
+  "security": {
+   "static": [],
+   "runtime_events": [
+    {
+     "kind": "fs_read_home",
+     "detail": "/Users/adam/Tagora/platform/tagora/sandbox/child.py",
+     "count": 1
+    }
+   ],
+   "egress": false,
+   "adversarial": [
+    {
+     "name": "injection",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.162,
+     "error": ""
+    },
+    {
+     "name": "blank1000",
+     "ok": true,
+     "timed_out": false,
+     "wall_s": 0.213,
+     "error": ""
+    }
+   ],
+   "hosting_blocked": false
+  },
+  "performance": {
+   "wall_p50_s": 0.1979,
+   "wall_p95_s": 0.2163,
+   "cpu_mean_s": 0.1719,
+   "rss_peak_mb": 152.5,
+   "large": {
+    "units": 16,
+    "ok": true,
+    "timed_out": false,
+    "wall_s": 0.816,
+    "cpu_s": 0.813,
+    "rss_mb": 152.5,
+    "cpu_s_per_unit": 0.05079
+   },
+   "errors": 0
+  },
+  "cost": {
+   "hardware_label": "通用 ARM CPU（每 vCPU）",
+   "usd_per_cpu_hour": 0.03625,
+   "price_source": "AWS c7g.large on-demand us-east-1, $0.0725/h for 2 vCPU (DoiT, 2026)",
+   "compute_usd_per_case": 1.7304581944444443e-06,
+   "compute_usd_per_verified_result": 3.4609163888888886e-06,
+   "list_price_usd": 0.0015,
+   "effective_price_usd": 0.003
+  },
+  "known_failures": [
+   "扫描件（纯图像）",
+   "页面旋转 90°"
+  ],
+  "recheck": {
+   "count": 0,
+   "trend": [
+    0.7091
+   ],
+   "last": "2026-10-24T06:20:38+00:00"
+  },
+  "verify_seconds": 2.6
+ },
+ "cases": [
+  {
+   "id": "plain-8aa1033e",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.2151,
+   "cpu_s": 0.2,
+   "rss_mb": 60.21875,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "plain-9d3f9a19",
+   "scenario": "plain",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.2163,
+   "cpu_s": 0.1917,
+   "rss_mb": 56.328125,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-5b8f84c6",
+   "scenario": "multicol",
+   "score": 0.5995,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.2153,
+   "cpu_s": 0.1894,
+   "rss_mb": 56.59375,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "multicol-32575172",
+   "scenario": "multicol",
+   "score": 0.6217,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.2127,
+   "cpu_s": 0.1861,
+   "rss_mb": 58.46875,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "table-6a74f899",
+   "scenario": "table",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1862,
+   "cpu_s": 0.164,
+   "rss_mb": 53.125,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "table-b73f9d67",
+   "scenario": "table",
+   "score": 0.768,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.191,
+   "cpu_s": 0.1642,
+   "rss_mb": 52.21875,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-0cbe76e2",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1969,
+   "cpu_s": 0.168,
+   "rss_mb": 55.484375,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "chinese-6223b5e5",
+   "scenario": "chinese",
+   "score": 1.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1979,
+   "cpu_s": 0.1714,
+   "rss_mb": 51.921875,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-2b1252a2",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1574,
+   "cpu_s": 0.1424,
+   "rss_mb": 55.484375,
+   "events": 0,
+   "timed_out": false
+  },
+  {
+   "id": "scanned-377d6b7c",
+   "scenario": "scanned",
+   "score": 0.0,
+   "ok": true,
+   "error": null,
+   "wall_s": 0.1539,
+   "cpu_s": 0.1413,
+   "rss_mb": 60.203125,
+   "events": 0,
+   "timed_out": false
+  }
+ ]
+}
