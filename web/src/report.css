@@ -462,3 +462,13 @@ svg .ref-lab {
     gap: 4px;
   }
 }
+
+.r-table.fhe {
+  width: 100%;
+  display: block;
+  overflow-x: auto;
+}
+
+.r-table.fhe td {
+  white-space: nowrap;
+}

@@ -71,6 +71,8 @@ def main():
             "underwriting": sim["underwriting"],
         },
     }
+    fhe = json.loads((ROOT / "benchmarks" / "fhe" / "results.json").read_text())
+    data["fhe"] = {"dataset": fhe["dataset"], "runs": [r for r in fhe["ckks"] if "error" not in r]}
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=1))
     print(f"wrote {OUT} ({len(tools)} tools)")
 

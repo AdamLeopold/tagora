@@ -63,6 +63,12 @@ class RunBody(BaseModel):
     filename: str = "input.pdf"
 
 
+class FhePredict(BaseModel):
+    model_id: str
+    context_id: str
+    ciphertext: str
+
+
 class FaucetBody(BaseModel):
     account: str
     usd: float = FAUCET_USD
@@ -221,6 +227,97 @@ def create_app(var_dir: str | Path | None = None) -> FastAPI:
         return JSONResponse(
             {"sealed_result": sealed_out, "receipt_hash": receipt_hash, "result_hash": result_hash, "block": block.index, "tool": listing.key},
             headers=headers,
+        )
+
+    # ---------------------------------------------------------------- ciphertext tier (CKKS)
+    fhe_models: dict = {}
+    fhe_contexts: dict[str, bytes] = {}
+
+    def _fhe_models():
+        if not fhe_models:
+            from .fhe import CkksParams, accuracy, load_data, train_logreg, train_square_mlp
+
+            Xtr, Xte, ytr, yte = load_data()
+            lr = train_logreg(Xtr, ytr, C=1.0)
+            mlp = train_square_mlp(Xtr, ytr, hidden=8, scale=0.1)
+            fhe_models["risk-logreg"] = {
+                "model": lr,
+                "params": CkksParams(8192, [60, 40, 60], 40),
+                "price_usd": 0.002,
+                "acc_plain": accuracy(lr.logits(Xte), yte),
+            }
+            fhe_models["risk-mlp-square"] = {
+                "model": mlp,
+                "params": CkksParams(8192, [60, 30, 30, 30, 60], 30),
+                "price_usd": 0.006,
+                "acc_plain": accuracy(mlp.logits(Xte), yte),
+            }
+        return fhe_models
+
+    @app.get("/v1/fhe/models")
+    def fhe_list():
+        return [
+            {
+                "id": k,
+                "kind": v["model"].kind,
+                "depth": v["model"].depth,
+                "ckks": {"poly_modulus_degree": v["params"].poly_modulus_degree, "coeff_mod_bit_sizes": v["params"].coeff_mod_bit_sizes, "scale_bits": v["params"].scale_bits},
+                "features": 30,
+                "task": "breast-cancer malignancy logit (sklearn dataset, standardised features)",
+                "acc_plain": round(v["acc_plain"], 4),
+                "price_usd": v["price_usd"],
+                "tier": "fhe",
+            }
+            for k, v in _fhe_models().items()
+        ]
+
+    @app.post("/v1/fhe/contexts")
+    async def fhe_context(request: Request):
+        import tenseal as ts
+
+        body = await request.body()
+        try:
+            ctx = ts.context_from(body)
+        except Exception as e:  # noqa: BLE001
+            raise HTTPException(400, f"not a TenSEAL context: {e}") from e
+        if ctx.has_secret_key():
+            raise HTTPException(400, "context contains the secret key; send the public context only")
+        cid = hashlib.sha256(body).hexdigest()
+        fhe_contexts[cid] = body
+        return {"context_id": cid, "bytes": len(body)}
+
+    @app.post("/v1/fhe/predict")
+    def fhe_predict(body: FhePredict, x_payment: str | None = Header(default=None)):
+        from .fhe import worker_eval
+
+        models = _fhe_models()
+        if body.model_id not in models:
+            raise HTTPException(404, "unknown model")
+        if body.context_id not in fhe_contexts:
+            raise HTTPException(404, "unknown context; POST /v1/fhe/contexts first")
+        spec = models[body.model_id]
+        resource = f"/v1/fhe/predict/{body.model_id}/{hashlib.sha256(body.ciphertext.encode()).hexdigest()[:16]}"
+        if not x_payment:
+            req = bank.requirements(spec["price_usd"], resource, description=f"{body.model_id} × 1 encrypted inference")
+            return JSONResponse({"x402Version": 1, "error": "X-PAYMENT header is required", "accepts": [req]}, status_code=402)
+        try:
+            receipt = bank.settle(x_payment, resource, {"author:tagora-fhe": SPLIT["author"], "compute:fhe-cpu": SPLIT["compute"], "platform:tagora": SPLIT["platform"]})
+        except PaymentError as e:
+            req = bank.requirements(spec["price_usd"], resource, description=f"{body.model_id} × 1 encrypted inference")
+            return JSONResponse({"x402Version": 1, "error": str(e), "accepts": [req]}, status_code=402)
+        t0 = time.perf_counter()
+        try:
+            out = worker_eval(fhe_contexts[body.context_id], base64.b64decode(body.ciphertext), spec["model"])
+        except Exception as e:  # noqa: BLE001
+            raise HTTPException(400, f"evaluation failed (parameters must match the model's CKKS settings): {e}") from e
+        ms = (time.perf_counter() - t0) * 1e3
+        in_hash = hashlib.sha256(base64.b64decode(body.ciphertext)).hexdigest()
+        out_hash = hashlib.sha256(out).hexdigest()
+        block = ledger.append("fhe-call", {"model": body.model_id, "input_ct_hash": in_hash, "result_ct_hash": out_hash, "price_micros": receipt["amount_micros"]})
+        receipt |= {"block": block.index}
+        return JSONResponse(
+            {"ciphertext": base64.b64encode(out).decode(), "worker_ms": round(ms, 2), "block": block.index, "result_ct_hash": out_hash},
+            headers={"X-PAYMENT-RESPONSE": base64.b64encode(json.dumps(receipt).encode()).decode()},
         )
 
     @app.post("/v1/faucet")

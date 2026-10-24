@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends libgl1 libglib2
 
 COPY pyproject.toml ./
 COPY tagora ./tagora
-RUN pip install --no-cache-dir ".[bench]"
+RUN pip install --no-cache-dir ".[bench,fhe]"
 COPY benchmarks ./benchmarks
 
 # Seed the registry from the published public-split cards so the API has listings on first boot.

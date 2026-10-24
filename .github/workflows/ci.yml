@@ -17,7 +17,7 @@ jobs:
       - name: Install
         run: |
           uv venv --python 3.11 .venv
-          uv pip install --python .venv/bin/python -e ".[bench,dev]"
+          uv pip install --python .venv/bin/python -e ".[bench,dev,fhe]"
       - name: Test
         run: .venv/bin/python -m pytest -q
 

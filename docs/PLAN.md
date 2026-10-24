@@ -29,8 +29,8 @@ platform/                     Python 后端（包名 tagora）
 - [x] M3 横评报告页面（官网 /report），部署到 GitHub Pages
 - [x] M4 阶段 1：路由器 + 402 结算 + FastAPI + MCP 服务，端到端测试
 - [x] M5 定价：有效价格路由、结果承保模型、参数模拟与调参
-- [ ] M6 密文档原型：训练小模型，用 CKKS 做加密推理，测准确率与开销
-- [ ] M7 Infra：CI（pytest + 前端构建）、Dockerfile、运行文档
+- [x] M6 密文档原型：训练小模型，用 CKKS 做加密推理，测准确率与开销
+- [x] M7 Infra：CI（pytest + 前端构建）、Dockerfile、运行文档
 - [ ] M8 Demo 接入真实后端数据，白皮书更新实测结果
 
 ## 进度日志
@@ -46,4 +46,5 @@ platform/                     Python 后端（包名 tagora）
 - 定价调参（tagora.sim）：先验 (0.1, 0.1)；有效价格路由每个验证结果 $0.00105，比“永远选最高分”便宜 48%；承保 margin 建议 30%（样本 30，P(亏损)=1.1%）。
 - M3：官网新增 /report.html（热力图、调参前后对比、路由策略、承保曲线、算力 vs 价格），数据由 platform/scripts/export_report.py 导出。
 - M7：CI 三个任务全部通过（platform pytest、前端构建、Docker 镜像构建 + 冒烟测试）。
-- 待办：M6 密文档、M8 Demo 接入真实数据、白皮书更新。
+- M6：tagora.fhe 用 sklearn 乳腺癌数据训练逻辑回归与平方激活 MLP，TenSEAL CKKS 加密推理。参数网格：N=4096/Δ=2^20 掉 4.7 个点；N=8192 两个模型与明文 100% 一致（25 ms / 96 ms，每次查询 230–345 KB）。API 新增 /v1/fhe/*（公共上下文、拒收私钥、402 支付、账本只记密文哈希）。
+- 待办：M8 Demo 接入真实数据、白皮书更新。

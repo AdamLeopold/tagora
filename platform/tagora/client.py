@@ -62,6 +62,34 @@ class TagoraClient:
             self._root = self._get("/v1/attest/root")["root_pubkey"]
         return self._root
 
+    # ---------------------------------------------------------------- ciphertext tier
+    def fhe_predict(self, features, model_id: str = "risk-logreg") -> dict:
+        """Encrypt locally, let the Worker score the ciphertext, decrypt locally."""
+        from .fhe import CkksParams, client_context, decrypt, encrypt, public_bytes
+
+        spec = next(m for m in self._get("/v1/fhe/models") if m["id"] == model_id)
+        c = spec["ckks"]
+        params = CkksParams(c["poly_modulus_degree"], c["coeff_mod_bit_sizes"], c["scale_bits"])
+        cache = self.__dict__.setdefault("_fhe_ctx", {})
+        if params.label() not in cache:
+            ctx = client_context(params)
+            r = self.http.post("/v1/fhe/contexts", content=public_bytes(ctx), headers={"Content-Type": "application/octet-stream"})
+            if r.status_code >= 400:
+                raise TagoraError(f"{r.status_code} {r.text}")
+            cache[params.label()] = (ctx, r.json()["context_id"])
+        ctx, cid = cache[params.label()]
+        import numpy as np
+
+        body = {"model_id": model_id, "context_id": cid, "ciphertext": base64.b64encode(encrypt(ctx, np.asarray(features, dtype=float))).decode()}
+        r = self.http.post("/v1/fhe/predict", json=body)
+        if r.status_code == 402:
+            r = self.http.post("/v1/fhe/predict", json=body, headers={"X-PAYMENT": self.wallet.pay(r.json()["accepts"][0])})
+        if r.status_code >= 400:
+            raise TagoraError(f"{r.status_code} {r.text}")
+        data = r.json()
+        logit = decrypt(ctx, base64.b64decode(data["ciphertext"]))
+        return {"model": model_id, "logit": logit, "label": int(logit > 0), "worker_ms": data["worker_ms"], "block": data["block"]}
+
     # ---------------------------------------------------------------- paid call
     def run_pdf(self, path: str | Path, *, key: str | None = None, sensitive: bool = False, strategy: str = "effective") -> dict:
         if key is None:

@@ -156,6 +156,28 @@ $('#report').innerHTML = `
   <p class="r-note">PDF 工具在同一场景下的表现接近确定性，所以弱先验更好。上线使用 (0.1, 0.1)：没有数据的新工具从 0.5 起步，而不是“确定成功”。</p>
 </section>
 
+<section class="r-sec">
+  <h2>密文档原型：服务器全程只见密文</h2>
+  <p class="r-lead sm">
+    用 ${esc(data.fhe.dataset)} 训练两个小模型，再用 CKKS 全同态加密推理：调用方本地加密 30 个临床特征，Worker 只拿到不含私钥的公共上下文和密文，
+    用自己的明文权重算出加密的 logit 返回，调用方本地解密。下表是参数网格的全部结果。
+  </p>
+  <table class="r-table fhe">
+    <thead><tr><th>模型</th><th>CKKS 参数</th><th>准确率 明文 → 密文</th><th>标签一致</th><th>Worker 计算</th><th>每次查询</th><th>公共上下文（一次性）</th></tr></thead>
+    <tbody>
+      ${data.fhe.runs
+        .map(
+          (r) => `<tr><td>${r.model === 'logreg' ? '逻辑回归' : '平方激活 MLP'}</td><td>${esc(r.params)}</td><td>${fmt(r.acc_plain, 3)} → ${fmt(r.acc_encrypted, 3)}</td><td>${pct(r.label_agreement)}</td><td>${fmt(r.ms_worker_eval, 1)} ms</td><td>${Math.round(r.kb_query)} KB</td><td>${fmt(r.kb_public_context / 1024, 1)} MB</td></tr>`,
+        )
+        .join('')}
+    </tbody>
+  </table>
+  <p class="r-note">
+    结论：参数取得太省（N=4096、Δ=2²⁰）会掉精度；N=8192 时两个模型都与明文结果完全一致。代价是比明文慢约百万倍、每次查询数百 KB——
+    适合输出很短、敏感度很高的任务（风险打分、分类），不适合长文本生成。模型越深，需要的模数链越长、越慢。
+  </p>
+</section>
+
 <section class="r-sec method">
   <h2>方法与局限</h2>
   <ul>
