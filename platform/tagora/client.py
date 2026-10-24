@@ -91,12 +91,39 @@ class TagoraClient:
         return {"model": model_id, "logit": logit, "label": int(logit > 0), "worker_ms": data["worker_ms"], "block": data["block"]}
 
     # ---------------------------------------------------------------- paid call
-    def run_pdf(self, path: str | Path, *, key: str | None = None, sensitive: bool = False, strategy: str = "effective") -> dict:
-        if key is None:
-            decision = self.route(category="pdf", sensitive=sensitive, strategy=strategy, k=1)
-            if not decision["picked"]:
-                raise TagoraError(f"no eligible worker: {decision['excluded']}")
-            key = decision["picked"][0]
+    def run_pdf(
+        self,
+        path: str | Path,
+        *,
+        key: str | None = None,
+        sensitive: bool = False,
+        strategy: str = "effective",
+        scenario: str | None = None,
+        max_attempts: int = 3,
+    ) -> dict:
+        """Route by the document's scenario (detected locally), call, and fall back to the
+        next-ranked Worker if the result fails a content-free acceptance check."""
+        from .detect import acceptable, detect_scenario
+
+        info = detect_scenario(path)
+        scenario = scenario or info["scenario"]
+        if key:
+            keys = [key]
+        else:
+            decision = self.route(category="pdf", sensitive=sensitive, strategy=strategy, scenario=scenario, k=1)
+            keys = [r["key"] for r in decision["ranked"]][:max_attempts]
+            if not keys:
+                raise TagoraError(f"no eligible worker for {scenario}: {decision['excluded']}")
+        attempts = []
+        for k in keys:
+            out = self._run_pdf_once(path, k)
+            attempts.append({"tool": k, "ok": out["ok"], "paid_usd": out["paid_usd"], "chars": len(out["markdown"])})
+            if out["ok"] and acceptable(out["markdown"], info["pages"]):
+                break
+        out |= {"scenario": scenario, "attempts": attempts, "total_paid_usd": round(sum(a["paid_usd"] for a in attempts), 6)}
+        return out
+
+    def _run_pdf_once(self, path: str | Path, key: str) -> dict:
         expected = self.card(key)["code_hash"]
 
         att = self._post("/v1/attest", {"key": key})

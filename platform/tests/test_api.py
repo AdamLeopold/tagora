@@ -132,3 +132,20 @@ def test_mcp_tools_are_registered_and_callable(env):
     assert found and found[0]["tier"] == "trusted"
     res = mcp_server.parse_pdf(str(next(PUBLIC.glob("chinese-*.pdf"))), sensitive=True)
     assert res["ok"] and res["block"] > 0
+
+
+def test_scenario_routing_on_real_cards(tmp_path):
+    """With the published hidden-split cards, a scanned PDF must go to an OCR-capable Worker."""
+    from tagora.bootstrap import bootstrap
+
+    app = create_app(tmp_path)
+    bootstrap(app.state.registry, app.state.ledger, "hidden")
+    c = TagoraClient(http=TestClient(app))
+    c.faucet(1.0)
+    scanned = next(PUBLIC.glob("scanned-*.pdf"))
+    out = c.run_pdf(scanned, sensitive=True)
+    assert out["scenario"] == "scanned"
+    assert out["tool"].startswith("tagora-hybrid") and out["tool"].endswith("-tee")
+    assert len(out["markdown"]) > 500
+    plain = c.run_pdf(next(PUBLIC.glob("plain-*.pdf")), sensitive=True)
+    assert plain["scenario"] == "plain" and plain["attempts"][0]["tool"].startswith("pypdf")  # cheapest that works
