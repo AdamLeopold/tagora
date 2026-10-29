@@ -8,3 +8,6 @@ __pycache__/
 .pytest_cache/
 platform/var/
 platform/benchmarks/pdf/corpus/hidden/
+
+# multi-device migration: business docs live in Dropbox, not in this public repo
+GPU Stablecoin/
