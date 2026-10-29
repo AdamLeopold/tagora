@@ -111,3 +111,7 @@ cd app && npx tsc --noEmit   # 前端类型检查
 | `README.md`、`CLAUDE.md`、`.gitignore`、`.nvmrc` | 代码（进 Git） | |
 | `GPU Stablecoin/` | 大数据或输出（不进 Git） | 约 286 MB 的商业文档与生成脚本；其中 `.proposal_build/`、`.revision_build/`、`.update_20261015/` 属可再生成的中间产物 |
 | `.DS_Store`（各级） | 可再生成、可丢弃 | macOS 自动生成 |
+
+## 多设备工作流
+
+这个项目在 Mac 和 Windows（RTX 4090）两台机器上用：代码靠 GitHub，大数据靠 Dropbox 链接。第一次在某台机器上使用、日常怎么同步、离线时怎么办，都写在 [WORKFLOW.md](WORKFLOW.md) 里。收工前把进度更新进本文件，然后提交并推送；另一台机器上的 Claude 只能从文件里知道进度。
