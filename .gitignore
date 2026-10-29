@@ -11,3 +11,6 @@ platform/benchmarks/pdf/corpus/hidden/
 
 # multi-device migration: business docs live in Dropbox, not in this public repo
 GPU Stablecoin/
+
+# --- symlinks into Dropbox (see .dropbox-links) ---
+/GPU Stablecoin
